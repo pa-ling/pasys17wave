@@ -1,0 +1,17 @@
+This is a minimalistic suggestion how a project could look like.
+The build process is driven by a makefile.
+
+The structure is as follows:
+ - In core.c (you are free to change the name and to add other
+   files) we implement the core functionality (e.g., algorithms).
+ - In core_test.c (and possibly other files with _test.c suffix)
+   we implement the unit tests as own executable programs without
+   using a fancy unit testing framework (you are however, free
+   to use one)
+ - In <program_name>.c we implement the main driver of the
+   program. This is the program that shall be invoked by the user.
+ - The makefile contains all flags and rules to build the program
+   and tests and rules how to run the test. Important targets are
+   "all", "build", "test", and "clean".
+
+Feel free to adapt this layout for your own needs.
