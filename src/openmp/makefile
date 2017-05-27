@@ -18,11 +18,11 @@ TARGET=wave
 # Flags and stuff, change as required
 OPTIMIZE=-O3
 # Flags for all languages
-CPPFLAGS=-ggdb $(OPTIMIZE) -Wall -MMD -MP -fopenmp
+CPPFLAGS=-ggdb $(OPTIMIZE) -Wall -MMD -MP -fopenmp -std=c11 `pkg-config --cflags gtk+-3.0` `pkg-config --libs gtk+-3.0`
 # Flags for C only
 CFLAGS=-Wmissing-prototypes
 # Flags for C++ only
-CXXFLAGS=-std=c++11
+CXXFLAGS=
 # Flags for the linker
 LDFLAGS=-fopenmp
 # Additional linker libs
@@ -66,16 +66,17 @@ ifneq ($(strip $(CPPSRCS)),)
 LINK.o = $(CPP) $(LDFLAGS) $(TARGET_ARCH)
 endif
 
-# The first target (all) is allways the default target
+# The first target (all) is always the default target
 .PHONY: all
 all: build test
 
-# Our buld target depends on the real target
+# Our build target depends on the real target
 .PHONY: build
 build: $(TARGET)
 
 # Our target is built up from the objects
 $(TARGET): $(OBJS)
+	$(CC) $(OBJS) -o $(TARGET) $(CPPFLAGS) $(LDLIBS)
 
 # Our test target
 # 

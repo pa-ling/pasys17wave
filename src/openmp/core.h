@@ -1,5 +1,6 @@
 #ifndef _CORE_H
 #define _CORE_H
+
 #include <assert.h>
 #include <math.h>
 
@@ -8,5 +9,7 @@
 void init(void);
 void simulate(void);
 void output(void);
+double* getNewValues(void);
+int getArraySize(void);
 
 #endif

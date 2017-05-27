@@ -25,34 +25,49 @@ int     endpoint = 1000;
 int     arrLen = sizeof(values) / sizeof(double);
 int     c = 1;
 
-void init(){
-
-    for(int i = 0; i < arrLen; i++){
-        values[i] = sin(i);
-        oldval[i] = values[i]; 
+void init()
+{
+    for (int i = 0; i < arrLen; i++)
+    {
+        values[i] = sin(i*0.02);
+        oldval[i] = values[i];
     }
 }
 
-void simulate(){
-    
+void simulate()
+{
 	#pragma omp parallel for
-    for (int i = startpoint; i <= endpoint; i++){ 
+    for (int i = startpoint; i <= endpoint; i++)
+    { 
         newval[i] = (2* values[i]) - oldval[i] + c * (values[i-1] - (2 * values[i]) + values[i+1]);
     }
 	
 	#pragma omp parallel for
-    for (int i = startpoint; i <= endpoint; i++){ 
+    for (int i = startpoint; i <= endpoint; i++)
+    { 
         oldval[i] = values[i];
         values[i] = newval[i];
     }
 }
 
-void output(){
+void output()
+{
     printf("|\told\t|\tnew\t|\n\n"); 
 
-    for (i = startpoint; i <= endpoint; i++){ 
+    for (i = startpoint; i <= endpoint; i++)
+    { 
         printf("%f\t|\t",oldval[i]); 
         printf("%f\n",values[i]);
     }
+}
+
+double* getNewValues()
+{
+    return newval;
+}
+
+int getArraySize()
+{
+    return TPOINTS;
 }
 

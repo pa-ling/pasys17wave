@@ -8,6 +8,7 @@
 #include <stdlib.h>
 
 #include "core.h"
+#include "gui.h"
 
 int main(int argc, char **argv)
 {
@@ -22,6 +23,8 @@ int main(int argc, char **argv)
 	simulate();
 
 	output();
+
+	draw(getNewValues(), getArraySize());
 
 	return EXIT_SUCCESS;
 }
