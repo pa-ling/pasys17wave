@@ -6,25 +6,36 @@
  */
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
 
 #include "core.h"
 #include "gui.h"
 
 int main(int argc, char **argv)
 {
+	//evaluate program arguments
+	bool nogui = false;
+	if (argc > 1 && strcmp(argv[1], "--nogui") == 0)
+	{
+		nogui = true;
+	}
+
+	//TODO: evaluate config file
 
 	//seq init
 	init();
 	
-	simulate();
-	
-	output();
+	for (int i=0; i<500; i++)
+	{
+		simulate();
+	}
 
-	simulate();
-
-	output();
-
-	draw(getNewValues(), getArraySize());
+	if (nogui){
+		output();
+	} else {
+		init_gui(getNewValues(), getArraySize());
+	}
 
 	return EXIT_SUCCESS;
 }

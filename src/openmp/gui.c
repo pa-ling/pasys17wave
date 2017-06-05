@@ -3,6 +3,8 @@
 
 /* Surface to store current scribbles */
 static cairo_surface_t *surface = NULL;
+GtkWidget *drawing_area;
+
 static double *results;
 static int size = 0;
 
@@ -59,7 +61,7 @@ static void draw_brush(GtkWidget *widget,
 {
     cairo_t *cr;
 
-    printf("x=%lf, y=%lf\n", x, y);
+    //printf("x=%lf, y=%lf\n", x, y);
 
     /* Paint to the surface, where we store our state */
     cr = cairo_create(surface);
@@ -81,7 +83,6 @@ static void activate(GtkApplication *app, gpointer user_data)
 {
     GtkWidget *window;
     GtkWidget *frame;
-    GtkWidget *drawing_area;
 
     window = gtk_application_window_new(app);
     gtk_window_set_title(GTK_WINDOW(window), "Drawing Area");
@@ -105,17 +106,12 @@ static void activate(GtkApplication *app, gpointer user_data)
 
     gtk_widget_show_all(window);
 
-    for (int i=0; i<150; i++) {
-        draw_brush(drawing_area, 40, i+75, 2, 0, 0, 0);
-    }
+    //TODO: use timer for animation (http://zetcode.com/gui/gtk2/gtkevents/)
 
-    for (int i=0; i<size; i++){
-        draw_brush(drawing_area, i+40, 150, 1, 0, 0, 0);
-        draw_brush(drawing_area, i+40, results[i]*50+150, 4, 0, 0, 1);
-    }
+    draw();
 }
 
-int draw(double r[], int s)
+int init_gui(double r[], int s)
 {
     results = r;
     size = s;
@@ -129,4 +125,18 @@ int draw(double r[], int s)
     g_object_unref(app);
 
     return status;
+}
+
+void draw() 
+{
+    clear_surface();
+
+    for (int i=0; i<150; i++) {
+        draw_brush(drawing_area, 40, i+75, 2, 0, 0, 0);
+    }
+
+    for (int i=0; i<size; i++){
+        draw_brush(drawing_area, i+40, 150, 1, 0, 0, 0);
+        draw_brush(drawing_area, i+40, results[i]*50+150, 4, 0, 0, 1);
+    }
 }

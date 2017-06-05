@@ -52,11 +52,8 @@ void simulate()
 
 void output()
 {
-    printf("|\told\t|\tnew\t|\n\n"); 
-
     for (i = startpoint; i <= endpoint; i++)
-    { 
-        printf("%f\t|\t",oldval[i]); 
+    {
         printf("%f\n",values[i]);
     }
 }
