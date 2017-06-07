@@ -1,0 +1,4 @@
+*.d
+*.o
+src/openmp/core_test
+src/openmp/wave

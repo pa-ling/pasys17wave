@@ -10,12 +10,12 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define TPOINTS 1000
+#define TPOINTS 1100
 #define PI 3.14159265358979323846
 
-double	values[TPOINTS + 2],  /* values at time t */
-	    oldval[TPOINTS + 2],  /* values at time (t-dt) */
-	    newval[TPOINTS + 2];  /* values at time (t+dt) */
+double	values[TPOINTS],  /* values at time t */
+	    oldval[TPOINTS],  /* values at time (t-dt) */
+	    newval[TPOINTS];  /* values at time (t+dt) */
 
 int     arrLen = sizeof(values) / sizeof(double);
 double     c = 0.1;
@@ -28,7 +28,8 @@ void init()
     values[arrLen-1] = 0;
     for (int i = 1; i < arrLen-1; i++)
     {
-        values[i] = sin((i+5)*0.02);
+        //values[i] = sin((i+5)*0.02);
+        values[i] = sin(i*0.02);
         oldval[i] = sin(i*0.02);
     }
 }
