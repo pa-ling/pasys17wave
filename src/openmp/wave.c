@@ -25,16 +25,11 @@ int main(int argc, char **argv)
 
 	//seq init
 	init();
-	
-	for (int i=0; i<500; i++)
-	{
-		simulate();
-	}
 
 	if (nogui){
 		output();
 	} else {
-		init_gui(getNewValues(), getArraySize());
+		init_gui();
 	}
 
 	return EXIT_SUCCESS;

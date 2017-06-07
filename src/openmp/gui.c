@@ -1,12 +1,11 @@
 #include "gui.h"
 #include <gtk/gtk.h>
+#include <stdlib.h>
+#include "core.h"
 
 /* Surface to store current scribbles */
 static cairo_surface_t *surface = NULL;
 GtkWidget *drawing_area;
-
-static double *results;
-static int size = 0;
 
 static void clear_surface(void)
 {
@@ -47,6 +46,10 @@ static gboolean draw_cb(GtkWidget *widget, cairo_t *cr, gpointer data)
     cairo_set_source_surface(cr, surface, 0, 0);
     cairo_paint(cr);
 
+    draw(getNewValues(), getArraySize());
+
+    printf("draw_cb\n");
+
     return FALSE;
 }
 
@@ -64,7 +67,7 @@ static void draw_brush(GtkWidget *widget,
     //printf("x=%lf, y=%lf\n", x, y);
 
     /* Paint to the surface, where we store our state */
-    cr = cairo_create(surface);
+    cr = cairo_create(surface); //optimieren!!
     cairo_set_source_rgb(cr, r, g, b);
 
     cairo_rectangle(cr, x - brushWidth/2, y - brushWidth/2, brushWidth, brushWidth);
@@ -107,27 +110,30 @@ static void activate(GtkApplication *app, gpointer user_data)
     gtk_widget_show_all(window);
 
     //TODO: use timer for animation (http://zetcode.com/gui/gtk2/gtkevents/)
-
-    draw();
 }
 
-int init_gui(double r[], int s)
+gboolean foo(void* arg)
 {
-    results = r;
-    size = s;
+	simulate();
+    gtk_widget_queue_draw(drawing_area);
+    return TRUE;
+}
 
+int init_gui()
+{
     GtkApplication *app;
     int status;
 
     app = gtk_application_new("org.gtk.example", G_APPLICATION_FLAGS_NONE);
     g_signal_connect(app, "activate", G_CALLBACK(activate), NULL);
+    (void)g_timeout_add(10, (GSourceFunc) foo, NULL);
     status = g_application_run(G_APPLICATION(app), 0, NULL);
     g_object_unref(app);
 
     return status;
 }
 
-void draw() 
+void draw(double results[], int size) 
 {
     clear_surface();
 

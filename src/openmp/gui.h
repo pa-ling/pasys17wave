@@ -3,7 +3,7 @@
 
 #include <gtk/gtk.h>
 
-int init_gui(double r[], int s);
-void draw(void);
+int init_gui();
+void draw(double results[], int size);
 
 #endif
