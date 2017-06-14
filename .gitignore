@@ -1,4 +1,13 @@
 *.d
 *.o
+*.aux
+*.log
+*.nav
+*.out
+*.pdf
+*.snm
+*.synctex.gz
+*.toc
+*.vrb
 src/openmp/core_test
 src/openmp/wave
