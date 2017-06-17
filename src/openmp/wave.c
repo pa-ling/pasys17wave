@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <pthread.h>
 #include "core.h"
+#include "config.h"
 
 #define X_OFFSET 40
 #define Y_OFFSET 20
@@ -194,6 +195,7 @@ gboolean timer_exe(GtkWidget * window)
 
 int main (int argc, char *argv[])
 {
+    readConfig();
     gdk_threads_init();
     gdk_threads_enter();
 
