@@ -3,6 +3,10 @@
 #include <pthread.h>
 #include "core.h"
 
+#define X_OFFSET 40
+#define Y_OFFSET 20
+#define MAGNIFICATION 50
+
 gboolean on_window_configure_event(GtkWidget * da, GdkEventConfigure * event, gpointer user_data);
 gboolean on_window_expose_event(GtkWidget * da, GdkEventExpose * event, gpointer user_data);
 void *do_draw(void *ptr);
@@ -60,6 +64,8 @@ void *do_draw(void *ptr)
     currently_drawing = 1;
 
     int width, height;
+    char currentMark[3];
+
     gdk_threads_enter();
     gdk_drawable_get_size(pixmap, &width, &height);
     gdk_threads_leave();
@@ -75,26 +81,67 @@ void *do_draw(void *ptr)
     cairo_set_source_rgb (cr, 1, 1, 1);
     cairo_paint(cr);
 
-    //draw axes
+    //draw y-axis with scale marks
     cairo_set_source_rgb (cr, 0, 0, 0);
-    cairo_move_to(cr, 40, 0);
-    cairo_line_to(cr, 40, height);
-    cairo_move_to(cr, 0, height/2);
-    cairo_line_to(cr, width, height/2);
+
+    cairo_move_to(cr, X_OFFSET, Y_OFFSET);
+    cairo_line_to(cr, X_OFFSET, height-Y_OFFSET);
+
+    for (int i=MAGNIFICATION; i<height/2-MAGNIFICATION; i+=MAGNIFICATION)
+    {
+        sprintf(currentMark, "%d", i/MAGNIFICATION);
+        cairo_move_to(cr, X_OFFSET-15, -i + height/2+4);
+        cairo_show_text(cr, currentMark);
+        cairo_move_to(cr, X_OFFSET-5, -i + height/2);
+        cairo_line_to(cr, X_OFFSET+5, -i + height/2);
+
+        sprintf(currentMark, "%d", -i/MAGNIFICATION);
+        cairo_move_to(cr, X_OFFSET-18, i + height/2+4);
+        cairo_show_text(cr, currentMark);
+        cairo_move_to(cr, X_OFFSET-5, i + height/2);
+        cairo_line_to(cr, X_OFFSET+5, i + height/2);
+    }
+
+    cairo_close_path(cr);
+
+    //draw x-axis with scale marks
+    cairo_move_to(cr, X_OFFSET-15, height/2+4);
+    cairo_show_text(cr, "0");
+    cairo_move_to(cr, X_OFFSET, height/2);
+    cairo_line_to(cr, width-X_OFFSET, height/2);
+
+    for (int i=MAGNIFICATION+X_OFFSET; i < width-X_OFFSET-MAGNIFICATION; i+=MAGNIFICATION)
+    {
+        sprintf(currentMark, "%d", i/MAGNIFICATION);
+        cairo_move_to(cr, i-4, height/2+15);
+        cairo_show_text(cr, currentMark);
+        cairo_move_to(cr, i, height/2-5);
+        cairo_line_to(cr, i, height/2+5);
+    }
+
     cairo_stroke(cr);
+
+    //draw arrow heads
+    cairo_move_to(cr, X_OFFSET, Y_OFFSET-5);
+    cairo_rel_line_to(cr, 5, 10);
+    cairo_rel_line_to(cr, -10, 0);
+    cairo_rel_line_to(cr, 5, -10);
+
+    cairo_move_to(cr, width-X_OFFSET+5, height/2);
+    cairo_rel_line_to(cr, -10, -5);
+    cairo_rel_line_to(cr, 0, 10);
+    cairo_rel_line_to(cr, 10, -5);
+    cairo_fill(cr);
 
     //draw curve
     double* results = getNewValues();
     int size = getArraySize();
     cairo_set_source_rgb (cr, 0, 0, 1);
-    //cairo_move_to(cr, 40, results[0]*50+height/2);
     for(int i = 1; i < size; i++)
     {
-        cairo_move_to(cr, i-1+40, results[i-1]*50+height/2);
-        cairo_line_to(cr, i+40, results[i]*50+height/2);
+        cairo_move_to(cr, i-1+X_OFFSET, -results[i-1]*MAGNIFICATION+height/2);
+        cairo_line_to(cr, i+X_OFFSET, -results[i]*MAGNIFICATION+height/2);
         cairo_stroke(cr);
-        //cairo_rectangle(cr, i+40, results[i]*50+height/2, 1, 1);
-        //cairo_fill(cr);
     }
     cairo_destroy(cr);
 
