@@ -7,6 +7,8 @@
 #define X_OFFSET 40
 #define Y_OFFSET 20
 #define MAGNIFICATION 50
+#define WINDOW_WIDTH 1200
+#define WINDOW_HEIGHT 315
 
 gboolean on_window_configure_event(GtkWidget * da, GdkEventConfigure * event, gpointer user_data);
 gboolean on_window_expose_event(GtkWidget * da, GdkEventExpose * event, gpointer user_data);
@@ -15,6 +17,7 @@ gboolean timer_exe(GtkWidget * window);
 
 static GdkPixmap *pixmap = NULL; //serves as our buffer
 static int currently_drawing = 0;
+static unsigned int currentSimulationStep = 0;
 
 /* 
  * Is executed when the window's size, position or stacking is changed.
@@ -75,8 +78,11 @@ void *do_draw(void *ptr)
     cairo_surface_t *cst = cairo_image_surface_create(CAIRO_FORMAT_ARGB32, width, height);
     cairo_t *cr = cairo_create(cst);
 
-    //calculate new values
     simulate();
+    if (0 != getSimulationSteps())
+    {
+        currentSimulationStep++;
+    }
 
     //clear area
     cairo_set_source_rgb (cr, 1, 1, 1);
@@ -166,20 +172,26 @@ void *do_draw(void *ptr)
 
 gboolean timer_exe(GtkWidget * window)
 {
-    static gboolean first_execution = TRUE;
     //use a safe function to get the value of currently_drawing so
     //we don't run into the usual multithreading issues
     int drawing_status = g_atomic_int_get(&currently_drawing);
+    
+    unsigned int simulationSteps = getSimulationSteps();
+    if (0 != simulationSteps) 
+    {
+        unsigned int simulationStatus = g_atomic_int_get(&currentSimulationStep);
+        if (simulationStatus > simulationSteps)
+        {
+            gtk_main_quit();
+        }
+    }
 
     //if we are not currently drawing anything, launch a thread to
     //update our pixmap
     if(drawing_status == 0)
     {
         static pthread_t thread_info;
-        if(first_execution != TRUE)
-        {
-            pthread_join(thread_info, NULL);
-        }
+        pthread_join(thread_info, NULL);
         pthread_create( &thread_info, NULL, do_draw, NULL); //do_draw is executed in a separate thread
     }
 
@@ -188,24 +200,31 @@ gboolean timer_exe(GtkWidget * window)
     gdk_drawable_get_size(pixmap, &width, &height);
     gtk_widget_queue_draw_area(window, 0, 0, width, height);
 
-    first_execution = FALSE;
-
     return TRUE;
 }
 
 int main (int argc, char *argv[])
 {
     readConfig();
+    init(getC()); //init calculation
+
+    if (!isGui())
+    {
+        for(int i=0; i < getSimulationSteps(); i++)
+        {
+            simulate();
+        }
+        output();
+        return 0;
+    }
     gdk_threads_init();
     gdk_threads_enter();
-
-    init(); //init calculation
     gtk_init(&argc, &argv);
 
     GtkWidget *window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title(GTK_WINDOW(window), "Wave Equation");
     //gtk_window_set_resizable(GTK_WINDOW(window), FALSE);
-    gtk_widget_set_size_request(window, 1200, 315);
+    gtk_widget_set_size_request(window, WINDOW_WIDTH, WINDOW_HEIGHT);
     g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(gtk_main_quit), NULL);
     g_signal_connect(G_OBJECT(window), "expose_event", G_CALLBACK(on_window_expose_event), NULL);
     g_signal_connect(G_OBJECT(window), "configure_event", G_CALLBACK(on_window_configure_event), NULL);

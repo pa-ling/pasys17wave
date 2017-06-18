@@ -5,12 +5,8 @@
  */
 
 #include "core.h"
-#include <omp.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
 
-#define TPOINTS 1100
+#define TPOINTS 1101
 
 double	values[TPOINTS],  /* values at time t */
 	    oldval[TPOINTS],  /* values at time (t-dt) */
@@ -19,8 +15,9 @@ double	values[TPOINTS],  /* values at time t */
 int     arrLen = sizeof(values) / sizeof(double);
 double  c = 0.1;
 
-void init()
+void init(double cFactor)
 {   
+    c = cFactor;
     values[0] = 0;
     oldval[0] = 0;
     oldval[arrLen-1] = 0;
@@ -28,8 +25,8 @@ void init()
     for (int i = 1; i < arrLen-1; i++)
     {
         //values[i] = sin((i+5)*0.02);
-        values[i] = sin(i*0.02);
         oldval[i] = sin(i*0.02);
+        values[i] = sin(i*0.02);
     }
 }
 
@@ -51,7 +48,7 @@ void simulate()
 
 void output()
 {
-    for (int i = 1; i < arrLen; i++)
+    for (int i = 0; i < arrLen; i++)
     {
         printf("%f\n",values[i]);
     }

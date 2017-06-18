@@ -3,10 +3,13 @@
 
 #include <assert.h>
 #include <math.h>
+#include <omp.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #define assertEqualsDouble(expected, actual, epsilon) (assert(fabs((expected) - (actual)) < epsilon));
 
-void init(void);
+void init(double cFactor);
 void simulate(void);
 void output(void);
 double* getNewValues(void);

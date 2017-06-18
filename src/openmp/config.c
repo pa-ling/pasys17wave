@@ -1,15 +1,30 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdbool.h>
-
 #include "config.h"
 
 #define MAXLINE 100
 
 double c;
-int arraySize, simulationSteps;
+unsigned int arraySize, simulationSteps;
 bool showGui;
+
+double getC()
+{
+    return c;
+}
+
+// unsigned int getArraySize()
+// {
+//     return arraySize;
+// }
+
+unsigned int getSimulationSteps()
+{
+    return simulationSteps;
+}
+
+bool isGui()
+{
+    return showGui;
+}
 
 int readConfig()
 {
@@ -68,7 +83,8 @@ int readConfig()
         }
         //printf("%s=%s;\n", configKey, configValue);
     }
-    printf("%lf, %d, %d, %d \n", c, arraySize, showGui, simulationSteps);
+    printf("Wave Benchmark started with the following parameters:\n\tC: %lf\n\tArray size: %d\n\tGUI: %s\n\tSimulations steps: %d\n",
+            c, arraySize, showGui ? "true" : "false", simulationSteps);
 
     return 0;
 }
