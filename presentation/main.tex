@@ -2,6 +2,8 @@
 \usetheme{Berlin}  %% Themenwahl
 %\definecolor{htwgreen}{rgb}{118,185,0}
 \definecolor{htwgreen}{rgb}{0.461,0.723,0}
+\definecolor{commentgreen}{rgb}{0,0.6,0}
+\definecolor{stringmauve}{rgb}{0.58,0,0.82}
 \usecolortheme[named=htwgreen]{structure}
 
 \setbeamertemplate{navigation symbols}{}%remove navigation symbols
@@ -16,12 +18,19 @@
 %\usepackage{svg} %insert vector graphics
 \usepackage[export]{adjustbox} %for columns?
 \usepackage{listings} %insert code
-\lstset{keepspaces=true, numbers=left} %configure code listings
+\lstset{ %configure code listings
+	basicstyle=\ttfamily,
+	keepspaces=true, 
+	numbers=left,
+	commentstyle=\color{commentgreen},
+	keywordstyle=\color{blue},
+	escapeinside={\%*}{*)}
+} 
 
 \title{Parallelisierung der Schwingung einer Gitarrensaite}
 \author{Patrick Fehling \& Christian Schütt}
 \date{\today}
-
+%**)
 \begin{document}
 \maketitle
 \frame{\tableofcontents}
@@ -50,41 +59,63 @@
 \end{frame}
 
 \section{Implementierung}
+\frame{\tableofcontents[current]}
+%Herangehenweise
+%Datenstrukturen
+%Parallelisierung
+%Snippets
+
+\begin{frame}[fragile]\frametitle{Konfiguration}
+\begin{lstlisting}[language=Python]
+# parameter C in the equation
+C 0.1
+# length of the wave
+ARRAY_SIZE 1101
+# 1 shows GUI; 0 hides GUI
+SHOW_GUI 1
+# count of simulations (0=infinitely)
+SIMULATION_STEPS 0
+[...]
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Berechnung}
+\begin{lstlisting}[language=C]
+#pragma %*\color{blue}{omp parallel for}*)
+for (int i = 1; i < arrLen-1; i++)
+{ 
+    newval[i] = 2*values[i] - oldval[i] + 
+    c*(values[i-1] - 2*values[i] + values[i+1]);
+}
+
+#pragma %*\color{blue}{omp parallel for}*)
+for (int i = 1; i < arrLen-1; i++)
+{ 
+    oldval[i] = values[i];
+    values[i] = newval[i];
+}
+\end{lstlisting}
+\end{frame}
+
 \begin{frame}\frametitle{Implementierung}
 	\begin{itemize}
-		\item
-		%Herangehenweise
-		%Datenstrukturen
-		%Parallelisierung
-		%Snippets
+		\item %Screenshot?
 	\end{itemize}
 \end{frame}
 
 \section{Vergleich}
+\frame{\tableofcontents[current]}
 \begin{frame}\frametitle{Vergleich}
 	%Diagramm 1
 \end{frame}
 
-\begin{frame}\frametitle{Vergleich}
-	%Diagramm 2
-\end{frame}
-
 \section{Demo}
-\section{Fazit \& Ausblick}
-
 \begin{frame}
-	\frametitle{Einführung}
-	\begin{Definition}
-		Definition..
-	\end{Definition}
-	Hier kommt eine Lücke:
-	\vspace{4ex}
-	\begin{itemize}
-		\item Listenelement 1
-		\item Listenelement 2
-	\end{itemize}
+	\centering
+	\textcolor{htwgreen}{{\LARGE Demo}}
 \end{frame}
 
+\section{Fazit \& Ausblick}
 \frame{\tableofcontents[current]}
 
 \begin{frame}\frametitle{Columns}
@@ -98,16 +129,13 @@
 	\end{columns}
 \end{frame}
 
-\begin{frame}[fragile]\frametitle{Codelisting}
-\begin{lstlisting}[language=Java]
-public int method(int arg0){
-    Object object = new Object();
-    return object.anotherMethod(arg0);
-}
-\end{lstlisting}
+\begin{frame}\frametitle{Zusammenfassung}
+	\begin{itemize}
+		\item Punkt 1
+	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Zusammenfassung}
+\begin{frame}\frametitle{Ausblick}
 	\begin{itemize}
 		\item Punkt 1
 	\end{itemize}
@@ -119,8 +147,10 @@ public int method(int arg0){
 \end{frame}
 
 \begin{frame}\frametitle{Quellen}
-		\begin{itemize}
-		\item Quelle 1
+	\footnotesize
+	\begin{itemize}
+		\item \url{https://developer.gnome.org/gtk3/stable/ch01s05.html}
+		\item \url{https://www.cairographics.org/threaded_animation_with_cairo/}
 	\end{itemize}
 \end{frame}
 
