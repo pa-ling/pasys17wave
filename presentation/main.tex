@@ -25,9 +25,11 @@
 	commentstyle=\color{commentgreen},
 	keywordstyle=\color{blue},
 	escapeinside={\%*}{*)}
-} 
+}
+\usepackage{tikz} %diagrams
+\usepackage{verbatim} %diagrams
 
-\title{Parallelisierung der Schwingung einer Gitarrensaite}
+\title{Visualisierung der Schwingung einer Gitarrensaite (Wellengleichung)}
 \author{Patrick Fehling \& Christian Schütt}
 \date{\today}
 %**)
@@ -106,7 +108,17 @@ for (int i = 1; i < arrLen-1; i++)
 \section{Vergleich}
 \frame{\tableofcontents[current]}
 \begin{frame}\frametitle{Vergleich}
-	%Diagramm 1
+	\begin{tikzpicture}[domain=0:4]
+	\draw[very thin,color=gray] (-0.1,-1.1) grid (3.9,3.9);
+	\draw[->] (-0.2,0) -- (4.2,0) node[right] {$x$};
+	\draw[->] (0,-1.2) -- (0,4.2) node[above] {$f(x)$};
+	\draw[color=red] plot[id=x] function{x} 
+	node[right] {$f(x) =x$};
+	\draw[color=blue] plot[id=sin] function{sin(x)} 
+	node[right] {$f(x) = \sin x$};
+	\draw[color=orange] plot[id=exp] function{0.05*exp(x)} 
+	node[right] {$f(x) = \frac{1}{20} \mathrm e^x$};
+	\end{tikzpicture}
 \end{frame}
 
 \section{Demo}
@@ -118,26 +130,20 @@ for (int i = 1; i < arrLen-1; i++)
 \section{Fazit \& Ausblick}
 \frame{\tableofcontents[current]}
 
-\begin{frame}\frametitle{Columns}
-	\begin{columns}[t,onlytextwidth]
-		\column{.5\textwidth}
-			Text auf linker Seite\\
-			Da ist ein Bild $\rightarrow$
-		\column{.5\textwidth}
-		\centering
-		\includegraphics[width=1.0\textwidth,valign=t]{pictures/placeholder}
-	\end{columns}
-\end{frame}
-
-\begin{frame}\frametitle{Zusammenfassung}
+\begin{frame}\frametitle{Fazit}
 	\begin{itemize}
-		\item Punkt 1
+		\item Parallelisierung brachte keine Verbesserung der Laufzeit
+		\item GTK ist anstrengend ;)
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Ausblick}
 	\begin{itemize}
-		\item Punkt 1
+		\item Implementierung einer zweiten Parallelisierung\newline($\rightarrow$ MPI oder OpenCL)
+		\item Implementierung eines Toggles (s. Epidemie)
+		\item Analysen mit valgrind und helgrind
+		\item optional: Implementierung von Perturbationen, Dämpfung
+		\item Paper \& Dokumentation
 	\end{itemize}
 \end{frame}
 
@@ -152,6 +158,17 @@ for (int i = 1; i < arrLen-1; i++)
 		\item \url{https://developer.gnome.org/gtk3/stable/ch01s05.html}
 		\item \url{https://www.cairographics.org/threaded_animation_with_cairo/}
 	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Columns}
+	\begin{columns}[t,onlytextwidth]
+		\column{.5\textwidth}
+		Text auf linker Seite\\
+		Da ist ein Bild $\rightarrow$
+		\column{.5\textwidth}
+		\centering
+		\includegraphics[width=1.0\textwidth,valign=t]{pictures/placeholder}
+	\end{columns}
 \end{frame}
 
 \end{document}
