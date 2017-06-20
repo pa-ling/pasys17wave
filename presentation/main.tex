@@ -50,7 +50,7 @@
 \begin{frame}\frametitle{Rahmenbedingungen}
 	\begin{itemize}
 		\item sequentielle Implementierung
-		\item parallelisierte Implementierungen (OpenMP und...)
+		\item parallelisierte Implementierungen
 		\item Graphical User Interface
 		\item Konfiguration per Benutzeroberfläche oder Konfigurationsdatei
 		\item optional: Perturbationen
@@ -71,6 +71,8 @@
 \begin{lstlisting}[language=Python]
 # parameter C in the equation
 C 0.1
+# shift of sinus function in x orientation
+SHIFT 1
 # length of the wave
 ARRAY_SIZE 1101
 # 1 shows GUI; 0 hides GUI
@@ -104,36 +106,31 @@ for (int i = 1; i < arrLen-1; i++)
 	\includegraphics[width=1.0\textwidth,valign=t]{pictures/gui}
 \end{frame}
 
-\section{Vergleich}
-\frame{\tableofcontents[current]}
-\begin{frame}\frametitle{Vergleich}
-	\begin{tikzpicture}[domain=0:4]
-	\draw[very thin,color=gray] (-0.1,-1.1) grid (3.9,3.9);
-	\draw[->] (-0.2,0) -- (4.2,0) node[right] {$x$};
-	\draw[->] (0,-1.2) -- (0,4.2) node[above] {$f(x)$};
-	\draw[color=red] plot[id=x] function{x} 
-	node[right] {$f(x) =x$};
-	\draw[color=blue] plot[id=sin] function{sin(x)} 
-	node[right] {$f(x) = \sin x$};
-	\draw[color=orange] plot[id=exp] function{0.05*exp(x)} 
-	node[right] {$f(x) = \frac{1}{20} \mathrm e^x$};
-	\end{tikzpicture}
-\end{frame}
-
 \section{Demo}
 \begin{frame}
 	\centering
 	\textcolor{htwgreen}{{\LARGE Demo}}
 \end{frame}
 
+\section{Vergleich}
+\frame{\tableofcontents[current]}
+
+\begin{frame}\frametitle{Vergleich}
+	\includegraphics[width=1.0\textwidth,valign=t]{pictures/zeit_punktmenge}
+\end{frame}
+
+\begin{frame}\frametitle{Vergleich}
+	\includegraphics[width=1.0\textwidth,valign=t]{pictures/speedup_punktmenge}
+\end{frame}
+
 \section{Fazit \& Ausblick}
 \frame{\tableofcontents[current]}
 
 \begin{frame}\frametitle{Fazit}
-	\begin{itemize}
-		\item Parallelisierung brachte keine Verbesserung der Laufzeit
-		\item GTK ist anstrengend ;)
-	\end{itemize}
+{\Large 	\begin{itemize}
+		\item Parallelisierung mit OpenMP brachte minimale Verbesserung der Laufzeit.\newline
+			$\rightarrow$ Zwei parallelisierte Schleifen
+	\end{itemize}}
 \end{frame}
 
 \begin{frame}\frametitle{Ausblick}
@@ -151,25 +148,6 @@ for (int i = 1; i < arrLen-1; i++)
 \begin{frame}
 	\centering
 	\textcolor{htwgreen}{{\LARGE Vielen Dank für Ihre Aufmerksamkeit!\\[6ex] Fragen?}}
-\end{frame}
-
-\begin{frame}\frametitle{Quellen}
-	\footnotesize
-	\begin{itemize}
-		\item \url{https://developer.gnome.org/gtk3/stable/ch01s05.html}
-		\item \url{https://www.cairographics.org/threaded_animation_with_cairo/}
-	\end{itemize}
-\end{frame}
-
-\begin{frame}\frametitle{Columns}
-	\begin{columns}[t,onlytextwidth]
-		\column{.5\textwidth}
-		Text auf linker Seite\\
-		Da ist ein Bild $\rightarrow$
-		\column{.5\textwidth}
-		\centering
-		\includegraphics[width=1.0\textwidth,valign=t]{pictures/placeholder}
-	\end{columns}
 \end{frame}
 
 \end{document}

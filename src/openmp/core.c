@@ -6,7 +6,7 @@
 
 #include "core.h"
 
-double  *values ,
+double  *values,
         *oldval, 
         *newval;
 
