@@ -8,23 +8,29 @@
 
 #define TPOINTS 1101
 
-double	values[TPOINTS],  /* values at time t */
-	    oldval[TPOINTS],  /* values at time (t-dt) */
-	    newval[TPOINTS];  /* values at time (t+dt) */
+double  *values,
+        *oldval, 
+        *newval;
 
-int     arrLen = sizeof(values) / sizeof(double);
+int     arrLen; 
 double  c = 0.1;
 
-void init(double cFactor)
+void init(double cFactor, unsigned int tPoints)
 {   
+    arrLen = tPoints;
+    values = malloc(tPoints * sizeof(double));  
+    oldval = malloc(tPoints * sizeof(double));
+    newval = malloc(tPoints * sizeof(double));
+
+    memset(values, 0, tPoints);
+    memset(oldval, 0, tPoints);
+    memset(newval, 0, tPoints);
+    
     c = cFactor;
-    values[0] = 0;
-    oldval[0] = 0;
-    oldval[arrLen-1] = 0;
-    values[arrLen-1] = 0;
+
     for (int i = 1; i < arrLen-1; i++)
     {
-        //values[i] = sin((i+5)*0.02);
+       // values[i] = sin((i+1)*0.02);
         oldval[i] = sin(i*0.02);
         values[i] = sin(i*0.02);
     }
@@ -62,5 +68,12 @@ double* getNewValues()
 int getArraySize()
 {
     return TPOINTS;
+}
+
+void terminate()
+{
+    free(newval);
+    free(oldval);
+    free(values);
 }
 

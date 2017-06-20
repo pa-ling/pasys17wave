@@ -206,7 +206,7 @@ gboolean timer_exe(GtkWidget * window)
 int main (int argc, char *argv[])
 {
     readConfig();
-    init(getC()); //init calculation
+    init(getC(),getDataSize()); //init calculation
 
     if (!isGui())
     {
@@ -238,6 +238,6 @@ int main (int argc, char *argv[])
 
     gtk_main();
     gdk_threads_leave();
-
+    terminate();
     return 0;
 }

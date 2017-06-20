@@ -11,10 +11,10 @@ double getC()
     return c;
 }
 
-// unsigned int getArraySize()
-// {
-//     return arraySize;
-// }
+unsigned int getDataSize()
+ {
+     return arraySize;
+ }
 
 unsigned int getSimulationSteps()
 {
@@ -85,6 +85,6 @@ int readConfig()
     }
     printf("Wave Benchmark started with the following parameters:\n\tC: %lf\n\tArray size: %d\n\tGUI: %s\n\tSimulations steps: %d\n",
             c, arraySize, showGui ? "true" : "false", simulationSteps);
-
+    free(filePointer);
     return 0;
 }

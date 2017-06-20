@@ -7,7 +7,7 @@
 #include <stdbool.h>
 
 double getC(void);
-//unsigned int getArraySize(void);
+unsigned int getDataSize(void);
 unsigned int getSimulationSteps(void);
 bool isGui(void);
 int readConfig(void);
