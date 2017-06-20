@@ -12,6 +12,7 @@
 
 gboolean on_window_configure_event(GtkWidget * da, GdkEventConfigure * event, gpointer user_data);
 gboolean on_window_expose_event(GtkWidget * da, GdkEventExpose * event, gpointer user_data);
+void close_window(void);
 void *do_draw(void *ptr);
 gboolean timer_exe(GtkWidget * window);
 
@@ -61,6 +62,11 @@ gboolean on_window_expose_event(GtkWidget * da, GdkEventExpose * event, gpointer
         event->area.x, event->area.y,
         event->area.width, event->area.height);
     return TRUE;
+}
+
+void close_window()
+{
+    gtk_main_quit ();
 }
 
 void *do_draw(void *ptr)
@@ -182,7 +188,7 @@ gboolean timer_exe(GtkWidget * window)
         unsigned int simulationStatus = g_atomic_int_get(&currentSimulationStep);
         if (simulationStatus > simulationSteps)
         {
-            gtk_main_quit();
+            close_window();
         }
     }
 
@@ -206,7 +212,7 @@ gboolean timer_exe(GtkWidget * window)
 int main (int argc, char *argv[])
 {
     readConfig();
-    init(getC(),getDataSize()); //init calculation
+    init(getC(),getDataSize(), getShift()); //init calculation
 
     if (!isGui())
     {
@@ -215,8 +221,10 @@ int main (int argc, char *argv[])
             simulate();
         }
         output();
+        terminate();
         return 0;
     }
+    
     gdk_threads_init();
     gdk_threads_enter();
     gtk_init(&argc, &argv);
@@ -225,7 +233,7 @@ int main (int argc, char *argv[])
     gtk_window_set_title(GTK_WINDOW(window), "Wave Equation");
     //gtk_window_set_resizable(GTK_WINDOW(window), FALSE);
     gtk_widget_set_size_request(window, WINDOW_WIDTH, WINDOW_HEIGHT);
-    g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(gtk_main_quit), NULL);
+    g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(close_window), NULL);
     g_signal_connect(G_OBJECT(window), "expose_event", G_CALLBACK(on_window_expose_event), NULL);
     g_signal_connect(G_OBJECT(window), "configure_event", G_CALLBACK(on_window_configure_event), NULL);
     gtk_widget_show_all(window);

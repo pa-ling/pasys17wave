@@ -2,7 +2,7 @@
 
 #define MAXLINE 100
 
-double c;
+double c, shift;
 unsigned int arraySize, simulationSteps;
 bool showGui;
 
@@ -15,6 +15,11 @@ unsigned int getDataSize()
  {
      return arraySize;
  }
+ 
+double getShift()
+{
+    return shift;
+}
 
 unsigned int getSimulationSteps()
 {
@@ -81,10 +86,14 @@ int readConfig()
         {
             simulationSteps = atoi(configValue);
         }
+        else if (0 == strcmp(configKey, "SHIFT"))
+        {
+            shift = atof(configValue);
+        }
         //printf("%s=%s;\n", configKey, configValue);
     }
-    printf("Wave Benchmark started with the following parameters:\n\tC: %lf\n\tArray size: %d\n\tGUI: %s\n\tSimulations steps: %d\n",
-            c, arraySize, showGui ? "true" : "false", simulationSteps);
-    free(filePointer);
+    printf("Wave Benchmark started with the following parameters:\n\tC: %lf\n\tShift: %lf\n\tArray size: %d\n\tGUI: %s\n\tSimulations steps: %d\n",
+            c, shift, arraySize, showGui ? "true" : "false", simulationSteps);
+
     return 0;
 }

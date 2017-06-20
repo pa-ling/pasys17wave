@@ -6,16 +6,14 @@
 
 #include "core.h"
 
-#define TPOINTS 1101
-
-double  *values,
+double  *values ,
         *oldval, 
         *newval;
 
 int     arrLen; 
-double  c = 0.1;
+double  c = 0.1, shift;
 
-void init(double cFactor, unsigned int tPoints)
+void init(double cFactor, unsigned int tPoints, double shiftFactor)
 {   
     arrLen = tPoints;
     values = malloc(tPoints * sizeof(double));  
@@ -27,12 +25,12 @@ void init(double cFactor, unsigned int tPoints)
     memset(newval, 0, tPoints);
     
     c = cFactor;
+    shift = shiftFactor;
 
     for (int i = 1; i < arrLen-1; i++)
     {
-       // values[i] = sin((i+1)*0.02);
+        values[i] = sin((i+shift)*0.02);
         oldval[i] = sin(i*0.02);
-        values[i] = sin(i*0.02);
     }
 }
 
@@ -67,7 +65,7 @@ double* getNewValues()
 
 int getArraySize()
 {
-    return TPOINTS;
+    return arrLen;
 }
 
 void terminate()

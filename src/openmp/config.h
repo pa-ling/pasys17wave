@@ -8,6 +8,7 @@
 
 double getC(void);
 unsigned int getDataSize(void);
+double getShift(void);
 unsigned int getSimulationSteps(void);
 bool isGui(void);
 int readConfig(void);
