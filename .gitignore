@@ -12,3 +12,4 @@
 *.gnuplot
 src/openmp/core_test
 src/openmp/wave
+.vscode

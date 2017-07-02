@@ -10,7 +10,7 @@ double  *values,
         *oldval, 
         *newval;
 
-int     arrLen; 
+int     arrLen, mode = 0; 
 double  c = 0.1, shift;
 
 void init(double cFactor, unsigned int tPoints, double shiftFactor)
@@ -38,15 +38,25 @@ void simulate()
 {
 	#pragma omp parallel for
     for (int i = 1; i < arrLen-1; i++)
-    { 
-        newval[i] = (2 * values[i]) - oldval[i] + c * (values[i-1] - (2 * values[i]) + values[i+1]);
+    {
+        if (0 == mode)
+        {
+            newval[i] = (2 * values[i]) - oldval[i] + c * (values[i-1] - (2 * values[i]) + values[i+1]);
+        }
+        else if (1 == mode)
+        {
+            oldval[i] = (2 * newval[i]) - values[i] + c * (newval[i-1] - (2 * newval[i]) + newval[i+1]);
+        }
+        else if (2 == mode)
+        {
+            values[i] = (2 * oldval[i]) - newval[i] + c * (oldval[i-1] - (2 * oldval[i]) + oldval[i+1]);
+        }
     }
-	
-	#pragma omp parallel for
-    for (int i = 1; i < arrLen-1; i++)
-    { 
-        oldval[i] = values[i];
-        values[i] = newval[i];
+
+    mode++;
+    if (2 < mode)
+    {
+        mode = 0;
     }
 }
 
@@ -60,7 +70,18 @@ void output()
 
 double* getNewValues()
 {
-    return newval;
+    if (0 == mode)
+    {
+        return newval;
+    }
+    else if (1 == mode)
+    {
+        return oldval;
+    }
+    else
+    {
+        return values;
+    }
 }
 
 int getArraySize()
