@@ -211,7 +211,7 @@ gboolean timer_exe(GtkWidget * window)
 
 int main (int argc, char *argv[])
 {
-    readConfig();
+    readConfig(argc, argv);
     init(getC(),getDataSize(), getShift()); //init calculation
 
     if (!isGui())

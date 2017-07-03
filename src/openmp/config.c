@@ -31,17 +31,24 @@ bool isGui()
     return showGui;
 }
 
-int readConfig()
+int readConfig(int argc, char *argv[])
 {
+    printf("argv[1]:%s\n", argv[1]);
+    char *configPath = "wave.conf";
+    if (1 < argc)
+    {
+        printf("argc==2\n");
+        configPath = argv[1];
+    }
+
     FILE * filePointer;
     char buffer[MAXLINE], configKey[20], configValue[10];
     int i, count;
 
-
-    filePointer = fopen("parameters.conf","r");
+    filePointer = fopen(configPath,"r");
     if(NULL == filePointer)
     {
-        printf("error getting file");
+        printf("Error getting config file '%s'!\n", configPath);
         return 1;
     } 
 
@@ -92,6 +99,14 @@ int readConfig()
         }
         //printf("%s=%s;\n", configKey, configValue);
     }
+
+    if (4 == argc)
+    {
+        printf("using advanced mode (only for testing purposes)");
+        arraySize = atoi(argv[2]);
+        simulationSteps = atoi(argv[3]);
+    }
+
     printf("Wave Benchmark started with the following parameters:\n\tC: %lf\n\tShift: %lf\n\tArray size: %d\n\tGUI: %s\n\tSimulations steps: %d\n",
             c, shift, arraySize, showGui ? "true" : "false", simulationSteps);
 

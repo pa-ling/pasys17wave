@@ -6,6 +6,8 @@
 
 #include "core.h"
 
+#define MAX_X 
+
 double  *values,
         *oldval, 
         *newval;
@@ -27,10 +29,10 @@ void init(double cFactor, unsigned int tPoints, double shiftFactor)
     c = cFactor;
     shift = shiftFactor;
 
-    for (int i = 1; i < arrLen-1; i++)
+    for (int i = 0; i < arrLen; i++)
     {
-        values[i] = sin((i+shift)*0.02);
         oldval[i] = sin(i*0.02);
+        values[i] = sin((i+shift)*0.02);
     }
 }
 
@@ -47,7 +49,7 @@ void simulate()
         {
             oldval[i] = (2 * newval[i]) - values[i] + c * (newval[i-1] - (2 * newval[i]) + newval[i+1]);
         }
-        else if (2 == mode)
+        else
         {
             values[i] = (2 * oldval[i]) - newval[i] + c * (oldval[i-1] - (2 * oldval[i]) + oldval[i+1]);
         }
