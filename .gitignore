@@ -4,7 +4,8 @@
 *.log
 *.nav
 *.out
-*.pdf
+presentation/*.pdf
+paper/*.pdf
 *.snm
 *.synctex.gz
 *.toc

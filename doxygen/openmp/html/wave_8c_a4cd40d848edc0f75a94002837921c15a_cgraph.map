@@ -1,0 +1,8 @@
+<map id="timer_exe" name="timer_exe">
+<area shape="rect" id="node2" href="$config_8c.html#a9d725f3bbbc35aaf72f2631cc8fc624f" title="getSimulationSteps" alt="" coords="284,5,419,32"/>
+<area shape="rect" id="node3" href="$wave_8c.html#aa0b970da4405389c144095b04eacd133" title="close_window" alt="" coords="132,56,236,83"/>
+<area shape="rect" id="node4" href="$wave_8c.html#a139ddc489fa431f04616430c085ee194" title="do_draw" alt="" coords="149,107,219,133"/>
+<area shape="rect" id="node5" href="$core_8c.html#a1f451daf160cbacfab1e7b495789750e" title="simulate" alt="" coords="316,56,387,83"/>
+<area shape="rect" id="node6" href="$core_8c.html#a52f1b48db944eec28aa0e073d6696c6e" title="getNewValues" alt="" coords="298,107,405,133"/>
+<area shape="rect" id="node7" href="$core_8c.html#a1779d5453fa635501dab78cf8c15a878" title="getArraySize" alt="" coords="303,157,400,184"/>
+</map>

@@ -1,0 +1,149 @@
+\hypertarget{config_8c}{\section{config.\+c File Reference}
+\label{config_8c}\index{config.\+c@{config.\+c}}
+}
+{\ttfamily \#include \char`\"{}config.\+h\char`\"{}}\\*
+Include dependency graph for config.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=334pt]{config_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{config_8c_a3e937c42922f7601edb17b747602c471}{M\+A\+X\+L\+I\+N\+E}~100
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{config_8c_ad6a27e3b844adae13dbf6b465823a21e}{get\+C} ()
+\item 
+unsigned int \hyperlink{config_8c_a67c57ddf78540d69a30c741b356e7542}{get\+Data\+Size} ()
+\item 
+double \hyperlink{config_8c_aebdfcddd76cca4f1223533964ee4aa99}{get\+Shift} ()
+\item 
+unsigned int \hyperlink{config_8c_a9d725f3bbbc35aaf72f2631cc8fc624f}{get\+Simulation\+Steps} ()
+\item 
+bool \hyperlink{config_8c_aa29143a63f65543a6056d46a96e3084f}{is\+Gui} ()
+\item 
+int \hyperlink{config_8c_ade1b280acb4bd6500e99379c58263ed3}{read\+Config} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{config_8c_a2c09e929a6ea340fc9653cca414b11d3}{c}
+\item 
+double \hyperlink{config_8c_a96059d6a5d7c39fab3ae98297844903c}{shift}
+\item 
+unsigned int \hyperlink{config_8c_a843746ea29cdf8c55725f192780ff3d8}{array\+Size}
+\item 
+unsigned int \hyperlink{config_8c_aa03b8b6be1a1fb18504b20ae58b70643}{simulation\+Steps}
+\item 
+bool \hyperlink{config_8c_a25c29b3841901ddaf6ee35f75e4833d1}{show\+Gui}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{config_8c_a3e937c42922f7601edb17b747602c471}{\index{config.\+c@{config.\+c}!M\+A\+X\+L\+I\+N\+E@{M\+A\+X\+L\+I\+N\+E}}
+\index{M\+A\+X\+L\+I\+N\+E@{M\+A\+X\+L\+I\+N\+E}!config.\+c@{config.\+c}}
+\subsubsection[{M\+A\+X\+L\+I\+N\+E}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+A\+X\+L\+I\+N\+E~100}}\label{config_8c_a3e937c42922f7601edb17b747602c471}
+
+
+\subsection{Function Documentation}
+\hypertarget{config_8c_ad6a27e3b844adae13dbf6b465823a21e}{\index{config.\+c@{config.\+c}!get\+C@{get\+C}}
+\index{get\+C@{get\+C}!config.\+c@{config.\+c}}
+\subsubsection[{get\+C}]{\setlength{\rightskip}{0pt plus 5cm}double get\+C (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{config_8c_ad6a27e3b844adae13dbf6b465823a21e}
+Returns a value for the length of each time step in the wave equation.
+
+\begin{DoxyReturn}{Returns}
+C 
+\end{DoxyReturn}
+\hypertarget{config_8c_a67c57ddf78540d69a30c741b356e7542}{\index{config.\+c@{config.\+c}!get\+Data\+Size@{get\+Data\+Size}}
+\index{get\+Data\+Size@{get\+Data\+Size}!config.\+c@{config.\+c}}
+\subsubsection[{get\+Data\+Size}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int get\+Data\+Size (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{config_8c_a67c57ddf78540d69a30c741b356e7542}
+Returns array size which is the length of the wave.
+
+\begin{DoxyReturn}{Returns}
+array size 
+\end{DoxyReturn}
+\hypertarget{config_8c_aebdfcddd76cca4f1223533964ee4aa99}{\index{config.\+c@{config.\+c}!get\+Shift@{get\+Shift}}
+\index{get\+Shift@{get\+Shift}!config.\+c@{config.\+c}}
+\subsubsection[{get\+Shift}]{\setlength{\rightskip}{0pt plus 5cm}double get\+Shift (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{config_8c_aebdfcddd76cca4f1223533964ee4aa99}
+Returns the shift value which is the difference of the inital waves.
+
+\begin{DoxyReturn}{Returns}
+shift 
+\end{DoxyReturn}
+\hypertarget{config_8c_a9d725f3bbbc35aaf72f2631cc8fc624f}{\index{config.\+c@{config.\+c}!get\+Simulation\+Steps@{get\+Simulation\+Steps}}
+\index{get\+Simulation\+Steps@{get\+Simulation\+Steps}!config.\+c@{config.\+c}}
+\subsubsection[{get\+Simulation\+Steps}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int get\+Simulation\+Steps (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{config_8c_a9d725f3bbbc35aaf72f2631cc8fc624f}
+Returns the Count of Steps which are executed before the program exits.
+
+\begin{DoxyReturn}{Returns}
+simulation steps 
+\end{DoxyReturn}
+\hypertarget{config_8c_aa29143a63f65543a6056d46a96e3084f}{\index{config.\+c@{config.\+c}!is\+Gui@{is\+Gui}}
+\index{is\+Gui@{is\+Gui}!config.\+c@{config.\+c}}
+\subsubsection[{is\+Gui}]{\setlength{\rightskip}{0pt plus 5cm}bool is\+Gui (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{config_8c_aa29143a63f65543a6056d46a96e3084f}
+Returns whether the gui shall be shown or not.
+
+\begin{DoxyReturn}{Returns}
+1 = show; 0 = do not show 
+\end{DoxyReturn}
+\hypertarget{config_8c_ade1b280acb4bd6500e99379c58263ed3}{\index{config.\+c@{config.\+c}!read\+Config@{read\+Config}}
+\index{read\+Config@{read\+Config}!config.\+c@{config.\+c}}
+\subsubsection[{read\+Config}]{\setlength{\rightskip}{0pt plus 5cm}int read\+Config (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}}\label{config_8c_ade1b280acb4bd6500e99379c58263ed3}
+Reads the given config and program arguments and provides those for other parts of the program.
+
+
+\begin{DoxyParams}{Parameters}
+{\em argc} & argument count of program \\
+\hline
+{\em argv} & arguments of program \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Variable Documentation}
+\hypertarget{config_8c_a843746ea29cdf8c55725f192780ff3d8}{\index{config.\+c@{config.\+c}!array\+Size@{array\+Size}}
+\index{array\+Size@{array\+Size}!config.\+c@{config.\+c}}
+\subsubsection[{array\+Size}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int array\+Size}}\label{config_8c_a843746ea29cdf8c55725f192780ff3d8}
+\hypertarget{config_8c_a2c09e929a6ea340fc9653cca414b11d3}{\index{config.\+c@{config.\+c}!c@{c}}
+\index{c@{c}!config.\+c@{config.\+c}}
+\subsubsection[{c}]{\setlength{\rightskip}{0pt plus 5cm}double c}}\label{config_8c_a2c09e929a6ea340fc9653cca414b11d3}
+\hypertarget{config_8c_a96059d6a5d7c39fab3ae98297844903c}{\index{config.\+c@{config.\+c}!shift@{shift}}
+\index{shift@{shift}!config.\+c@{config.\+c}}
+\subsubsection[{shift}]{\setlength{\rightskip}{0pt plus 5cm}double shift}}\label{config_8c_a96059d6a5d7c39fab3ae98297844903c}
+\hypertarget{config_8c_a25c29b3841901ddaf6ee35f75e4833d1}{\index{config.\+c@{config.\+c}!show\+Gui@{show\+Gui}}
+\index{show\+Gui@{show\+Gui}!config.\+c@{config.\+c}}
+\subsubsection[{show\+Gui}]{\setlength{\rightskip}{0pt plus 5cm}bool show\+Gui}}\label{config_8c_a25c29b3841901ddaf6ee35f75e4833d1}
+\hypertarget{config_8c_aa03b8b6be1a1fb18504b20ae58b70643}{\index{config.\+c@{config.\+c}!simulation\+Steps@{simulation\+Steps}}
+\index{simulation\+Steps@{simulation\+Steps}!config.\+c@{config.\+c}}
+\subsubsection[{simulation\+Steps}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int simulation\+Steps}}\label{config_8c_aa03b8b6be1a1fb18504b20ae58b70643}

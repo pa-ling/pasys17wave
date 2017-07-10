@@ -1,0 +1,139 @@
+\hypertarget{core_8c}{\section{core.\+c File Reference}
+\label{core_8c}\index{core.\+c@{core.\+c}}
+}
+{\ttfamily \#include \char`\"{}core.\+h\char`\"{}}\\*
+Include dependency graph for core.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{core_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{core_8c_a2c792ddc06951a4c4d72722e4779f144}{init} (double c\+Factor, unsigned int t\+Points, double shift\+Factor)
+\item 
+void \hyperlink{core_8c_a1f451daf160cbacfab1e7b495789750e}{simulate} ()
+\item 
+void \hyperlink{core_8c_a7437b254e19e7e12fc2ec99945f4ecea}{output} ()
+\item 
+double $\ast$ \hyperlink{core_8c_a52f1b48db944eec28aa0e073d6696c6e}{get\+New\+Values} ()
+\item 
+int \hyperlink{core_8c_a1779d5453fa635501dab78cf8c15a878}{get\+Array\+Size} ()
+\item 
+void \hyperlink{core_8c_a74a45d2648335936561898c390281a6a}{terminate} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double $\ast$ \hyperlink{core_8c_a2098158062e3e63fce7d2575b324c386}{values}
+\item 
+double $\ast$ \hyperlink{core_8c_a4ff5e6005029031acf0e76184141b0b1}{oldval}
+\item 
+double $\ast$ \hyperlink{core_8c_af3a59edd41b5d1449b69355fdffd29a0}{newval}
+\item 
+int \hyperlink{core_8c_a050bf9eb9b046d41394b6169721a2fde}{arr\+Len}
+\item 
+int \hyperlink{core_8c_a1ea5d0cb93f22f7d0fdf804bd68c3326}{mode} = 0
+\item 
+double \hyperlink{core_8c_a2c09e929a6ea340fc9653cca414b11d3}{c} = 0.\+1
+\item 
+double \hyperlink{core_8c_a96059d6a5d7c39fab3ae98297844903c}{shift}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Implements the core of the algorithm. 
+
+\subsection{Function Documentation}
+\hypertarget{core_8c_a1779d5453fa635501dab78cf8c15a878}{\index{core.\+c@{core.\+c}!get\+Array\+Size@{get\+Array\+Size}}
+\index{get\+Array\+Size@{get\+Array\+Size}!core.\+c@{core.\+c}}
+\subsubsection[{get\+Array\+Size}]{\setlength{\rightskip}{0pt plus 5cm}int get\+Array\+Size (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{core_8c_a1779d5453fa635501dab78cf8c15a878}
+Return lengths of the value arrays
+
+\begin{DoxyReturn}{Returns}
+lengths 
+\end{DoxyReturn}
+\hypertarget{core_8c_a52f1b48db944eec28aa0e073d6696c6e}{\index{core.\+c@{core.\+c}!get\+New\+Values@{get\+New\+Values}}
+\index{get\+New\+Values@{get\+New\+Values}!core.\+c@{core.\+c}}
+\subsubsection[{get\+New\+Values}]{\setlength{\rightskip}{0pt plus 5cm}double$\ast$ get\+New\+Values (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{core_8c_a52f1b48db944eec28aa0e073d6696c6e}
+Returns the current state of most recent values.
+
+\begin{DoxyReturn}{Returns}
+pointer to array of the newest values 
+\end{DoxyReturn}
+\hypertarget{core_8c_a2c792ddc06951a4c4d72722e4779f144}{\index{core.\+c@{core.\+c}!init@{init}}
+\index{init@{init}!core.\+c@{core.\+c}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void init (
+\begin{DoxyParamCaption}
+\item[{double}]{c\+Factor, }
+\item[{unsigned int}]{t\+Points, }
+\item[{double}]{shift\+Factor}
+\end{DoxyParamCaption}
+)}}\label{core_8c_a2c792ddc06951a4c4d72722e4779f144}
+Initializes the wave with the results of a sinus function.
+
+
+\begin{DoxyParams}{Parameters}
+{\em c\+Factor} & time step size \\
+\hline
+{\em t\+Points} & array length \\
+\hline
+{\em shift\+Factor} & difference between initial waves \\
+\hline
+\end{DoxyParams}
+\hypertarget{core_8c_a7437b254e19e7e12fc2ec99945f4ecea}{\index{core.\+c@{core.\+c}!output@{output}}
+\index{output@{output}!core.\+c@{core.\+c}}
+\subsubsection[{output}]{\setlength{\rightskip}{0pt plus 5cm}void output (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{core_8c_a7437b254e19e7e12fc2ec99945f4ecea}
+Outputs the current state of most recent values. \hypertarget{core_8c_a1f451daf160cbacfab1e7b495789750e}{\index{core.\+c@{core.\+c}!simulate@{simulate}}
+\index{simulate@{simulate}!core.\+c@{core.\+c}}
+\subsubsection[{simulate}]{\setlength{\rightskip}{0pt plus 5cm}void simulate (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{core_8c_a1f451daf160cbacfab1e7b495789750e}
+Executes on simulation step using the wave equation. \hypertarget{core_8c_a74a45d2648335936561898c390281a6a}{\index{core.\+c@{core.\+c}!terminate@{terminate}}
+\index{terminate@{terminate}!core.\+c@{core.\+c}}
+\subsubsection[{terminate}]{\setlength{\rightskip}{0pt plus 5cm}void terminate (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{core_8c_a74a45d2648335936561898c390281a6a}
+Frees all allocated memory. 
+
+\subsection{Variable Documentation}
+\hypertarget{core_8c_a050bf9eb9b046d41394b6169721a2fde}{\index{core.\+c@{core.\+c}!arr\+Len@{arr\+Len}}
+\index{arr\+Len@{arr\+Len}!core.\+c@{core.\+c}}
+\subsubsection[{arr\+Len}]{\setlength{\rightskip}{0pt plus 5cm}int arr\+Len}}\label{core_8c_a050bf9eb9b046d41394b6169721a2fde}
+\hypertarget{core_8c_a2c09e929a6ea340fc9653cca414b11d3}{\index{core.\+c@{core.\+c}!c@{c}}
+\index{c@{c}!core.\+c@{core.\+c}}
+\subsubsection[{c}]{\setlength{\rightskip}{0pt plus 5cm}double c = 0.\+1}}\label{core_8c_a2c09e929a6ea340fc9653cca414b11d3}
+\hypertarget{core_8c_a1ea5d0cb93f22f7d0fdf804bd68c3326}{\index{core.\+c@{core.\+c}!mode@{mode}}
+\index{mode@{mode}!core.\+c@{core.\+c}}
+\subsubsection[{mode}]{\setlength{\rightskip}{0pt plus 5cm}int mode = 0}}\label{core_8c_a1ea5d0cb93f22f7d0fdf804bd68c3326}
+\hypertarget{core_8c_af3a59edd41b5d1449b69355fdffd29a0}{\index{core.\+c@{core.\+c}!newval@{newval}}
+\index{newval@{newval}!core.\+c@{core.\+c}}
+\subsubsection[{newval}]{\setlength{\rightskip}{0pt plus 5cm}double $\ast$ newval}}\label{core_8c_af3a59edd41b5d1449b69355fdffd29a0}
+\hypertarget{core_8c_a4ff5e6005029031acf0e76184141b0b1}{\index{core.\+c@{core.\+c}!oldval@{oldval}}
+\index{oldval@{oldval}!core.\+c@{core.\+c}}
+\subsubsection[{oldval}]{\setlength{\rightskip}{0pt plus 5cm}double $\ast$ oldval}}\label{core_8c_a4ff5e6005029031acf0e76184141b0b1}
+\hypertarget{core_8c_a96059d6a5d7c39fab3ae98297844903c}{\index{core.\+c@{core.\+c}!shift@{shift}}
+\index{shift@{shift}!core.\+c@{core.\+c}}
+\subsubsection[{shift}]{\setlength{\rightskip}{0pt plus 5cm}double shift}}\label{core_8c_a96059d6a5d7c39fab3ae98297844903c}
+\hypertarget{core_8c_a2098158062e3e63fce7d2575b324c386}{\index{core.\+c@{core.\+c}!values@{values}}
+\index{values@{values}!core.\+c@{core.\+c}}
+\subsubsection[{values}]{\setlength{\rightskip}{0pt plus 5cm}double$\ast$ values}}\label{core_8c_a2098158062e3e63fce7d2575b324c386}

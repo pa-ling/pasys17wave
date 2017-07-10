@@ -1,0 +1,148 @@
+\hypertarget{wave_8c}{\section{wave.\+c File Reference}
+\label{wave_8c}\index{wave.\+c@{wave.\+c}}
+}
+{\ttfamily \#include $<$gtk/gtk.\+h$>$}\\*
+{\ttfamily \#include $<$unistd.\+h$>$}\\*
+{\ttfamily \#include $<$pthread.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}core.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}config.\+h\char`\"{}}\\*
+Include dependency graph for wave.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{wave_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{wave_8c_aaf6b22b89bb364988f4882030a309a99}{X\+\_\+\+O\+F\+F\+S\+E\+T}~40
+\item 
+\#define \hyperlink{wave_8c_aff6396abd8dad0f793f1a4333682a2be}{Y\+\_\+\+O\+F\+F\+S\+E\+T}~20
+\item 
+\#define \hyperlink{wave_8c_a727ffbbc69f2aeeb24907681dc43a7a6}{M\+A\+G\+N\+I\+F\+I\+C\+A\+T\+I\+O\+N}~50
+\item 
+\#define \hyperlink{wave_8c_a498d9f026138406895e9a34b504ac6a6}{W\+I\+N\+D\+O\+W\+\_\+\+W\+I\+D\+T\+H}~1200
+\item 
+\#define \hyperlink{wave_8c_a5473cf64fa979b48335079c99532e243}{W\+I\+N\+D\+O\+W\+\_\+\+H\+E\+I\+G\+H\+T}~315
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+gboolean \hyperlink{wave_8c_abf397c7a13188c9084cbfb8fa44a0101}{on\+\_\+window\+\_\+configure\+\_\+event} (Gtk\+Widget $\ast$da, Gdk\+Event\+Configure $\ast$event, gpointer user\+\_\+data)
+\item 
+gboolean \hyperlink{wave_8c_a160ea893ba694f940cac098f8f748d44}{on\+\_\+window\+\_\+expose\+\_\+event} (Gtk\+Widget $\ast$da, Gdk\+Event\+Expose $\ast$event, gpointer user\+\_\+data)
+\item 
+void \hyperlink{wave_8c_aa0b970da4405389c144095b04eacd133}{close\+\_\+window} (void)
+\item 
+void $\ast$ \hyperlink{wave_8c_a139ddc489fa431f04616430c085ee194}{do\+\_\+draw} (void $\ast$ptr)
+\item 
+gboolean \hyperlink{wave_8c_a4cd40d848edc0f75a94002837921c15a}{timer\+\_\+exe} (Gtk\+Widget $\ast$window)
+\item 
+int \hyperlink{wave_8c_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{wave_8c_a727ffbbc69f2aeeb24907681dc43a7a6}{\index{wave.\+c@{wave.\+c}!M\+A\+G\+N\+I\+F\+I\+C\+A\+T\+I\+O\+N@{M\+A\+G\+N\+I\+F\+I\+C\+A\+T\+I\+O\+N}}
+\index{M\+A\+G\+N\+I\+F\+I\+C\+A\+T\+I\+O\+N@{M\+A\+G\+N\+I\+F\+I\+C\+A\+T\+I\+O\+N}!wave.\+c@{wave.\+c}}
+\subsubsection[{M\+A\+G\+N\+I\+F\+I\+C\+A\+T\+I\+O\+N}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+A\+G\+N\+I\+F\+I\+C\+A\+T\+I\+O\+N~50}}\label{wave_8c_a727ffbbc69f2aeeb24907681dc43a7a6}
+\hypertarget{wave_8c_a5473cf64fa979b48335079c99532e243}{\index{wave.\+c@{wave.\+c}!W\+I\+N\+D\+O\+W\+\_\+\+H\+E\+I\+G\+H\+T@{W\+I\+N\+D\+O\+W\+\_\+\+H\+E\+I\+G\+H\+T}}
+\index{W\+I\+N\+D\+O\+W\+\_\+\+H\+E\+I\+G\+H\+T@{W\+I\+N\+D\+O\+W\+\_\+\+H\+E\+I\+G\+H\+T}!wave.\+c@{wave.\+c}}
+\subsubsection[{W\+I\+N\+D\+O\+W\+\_\+\+H\+E\+I\+G\+H\+T}]{\setlength{\rightskip}{0pt plus 5cm}\#define W\+I\+N\+D\+O\+W\+\_\+\+H\+E\+I\+G\+H\+T~315}}\label{wave_8c_a5473cf64fa979b48335079c99532e243}
+\hypertarget{wave_8c_a498d9f026138406895e9a34b504ac6a6}{\index{wave.\+c@{wave.\+c}!W\+I\+N\+D\+O\+W\+\_\+\+W\+I\+D\+T\+H@{W\+I\+N\+D\+O\+W\+\_\+\+W\+I\+D\+T\+H}}
+\index{W\+I\+N\+D\+O\+W\+\_\+\+W\+I\+D\+T\+H@{W\+I\+N\+D\+O\+W\+\_\+\+W\+I\+D\+T\+H}!wave.\+c@{wave.\+c}}
+\subsubsection[{W\+I\+N\+D\+O\+W\+\_\+\+W\+I\+D\+T\+H}]{\setlength{\rightskip}{0pt plus 5cm}\#define W\+I\+N\+D\+O\+W\+\_\+\+W\+I\+D\+T\+H~1200}}\label{wave_8c_a498d9f026138406895e9a34b504ac6a6}
+\hypertarget{wave_8c_aaf6b22b89bb364988f4882030a309a99}{\index{wave.\+c@{wave.\+c}!X\+\_\+\+O\+F\+F\+S\+E\+T@{X\+\_\+\+O\+F\+F\+S\+E\+T}}
+\index{X\+\_\+\+O\+F\+F\+S\+E\+T@{X\+\_\+\+O\+F\+F\+S\+E\+T}!wave.\+c@{wave.\+c}}
+\subsubsection[{X\+\_\+\+O\+F\+F\+S\+E\+T}]{\setlength{\rightskip}{0pt plus 5cm}\#define X\+\_\+\+O\+F\+F\+S\+E\+T~40}}\label{wave_8c_aaf6b22b89bb364988f4882030a309a99}
+\hypertarget{wave_8c_aff6396abd8dad0f793f1a4333682a2be}{\index{wave.\+c@{wave.\+c}!Y\+\_\+\+O\+F\+F\+S\+E\+T@{Y\+\_\+\+O\+F\+F\+S\+E\+T}}
+\index{Y\+\_\+\+O\+F\+F\+S\+E\+T@{Y\+\_\+\+O\+F\+F\+S\+E\+T}!wave.\+c@{wave.\+c}}
+\subsubsection[{Y\+\_\+\+O\+F\+F\+S\+E\+T}]{\setlength{\rightskip}{0pt plus 5cm}\#define Y\+\_\+\+O\+F\+F\+S\+E\+T~20}}\label{wave_8c_aff6396abd8dad0f793f1a4333682a2be}
+
+
+\subsection{Function Documentation}
+\hypertarget{wave_8c_aa0b970da4405389c144095b04eacd133}{\index{wave.\+c@{wave.\+c}!close\+\_\+window@{close\+\_\+window}}
+\index{close\+\_\+window@{close\+\_\+window}!wave.\+c@{wave.\+c}}
+\subsubsection[{close\+\_\+window}]{\setlength{\rightskip}{0pt plus 5cm}void close\+\_\+window (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{wave_8c_aa0b970da4405389c144095b04eacd133}
+\hypertarget{wave_8c_a139ddc489fa431f04616430c085ee194}{\index{wave.\+c@{wave.\+c}!do\+\_\+draw@{do\+\_\+draw}}
+\index{do\+\_\+draw@{do\+\_\+draw}!wave.\+c@{wave.\+c}}
+\subsubsection[{do\+\_\+draw}]{\setlength{\rightskip}{0pt plus 5cm}void $\ast$ do\+\_\+draw (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{ptr}
+\end{DoxyParamCaption}
+)}}\label{wave_8c_a139ddc489fa431f04616430c085ee194}
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=270pt]{wave_8c_a139ddc489fa431f04616430c085ee194_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{wave_8c_a0ddf1224851353fc92bfbff6f499fa97}{\index{wave.\+c@{wave.\+c}!main@{main}}
+\index{main@{main}!wave.\+c@{wave.\+c}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}}\label{wave_8c_a0ddf1224851353fc92bfbff6f499fa97}
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{wave_8c_a0ddf1224851353fc92bfbff6f499fa97_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{wave_8c_abf397c7a13188c9084cbfb8fa44a0101}{\index{wave.\+c@{wave.\+c}!on\+\_\+window\+\_\+configure\+\_\+event@{on\+\_\+window\+\_\+configure\+\_\+event}}
+\index{on\+\_\+window\+\_\+configure\+\_\+event@{on\+\_\+window\+\_\+configure\+\_\+event}!wave.\+c@{wave.\+c}}
+\subsubsection[{on\+\_\+window\+\_\+configure\+\_\+event}]{\setlength{\rightskip}{0pt plus 5cm}gboolean on\+\_\+window\+\_\+configure\+\_\+event (
+\begin{DoxyParamCaption}
+\item[{Gtk\+Widget $\ast$}]{da, }
+\item[{Gdk\+Event\+Configure $\ast$}]{event, }
+\item[{gpointer}]{user\+\_\+data}
+\end{DoxyParamCaption}
+)}}\label{wave_8c_abf397c7a13188c9084cbfb8fa44a0101}
+\hypertarget{wave_8c_a160ea893ba694f940cac098f8f748d44}{\index{wave.\+c@{wave.\+c}!on\+\_\+window\+\_\+expose\+\_\+event@{on\+\_\+window\+\_\+expose\+\_\+event}}
+\index{on\+\_\+window\+\_\+expose\+\_\+event@{on\+\_\+window\+\_\+expose\+\_\+event}!wave.\+c@{wave.\+c}}
+\subsubsection[{on\+\_\+window\+\_\+expose\+\_\+event}]{\setlength{\rightskip}{0pt plus 5cm}gboolean on\+\_\+window\+\_\+expose\+\_\+event (
+\begin{DoxyParamCaption}
+\item[{Gtk\+Widget $\ast$}]{da, }
+\item[{Gdk\+Event\+Expose $\ast$}]{event, }
+\item[{gpointer}]{user\+\_\+data}
+\end{DoxyParamCaption}
+)}}\label{wave_8c_a160ea893ba694f940cac098f8f748d44}
+\hypertarget{wave_8c_a4cd40d848edc0f75a94002837921c15a}{\index{wave.\+c@{wave.\+c}!timer\+\_\+exe@{timer\+\_\+exe}}
+\index{timer\+\_\+exe@{timer\+\_\+exe}!wave.\+c@{wave.\+c}}
+\subsubsection[{timer\+\_\+exe}]{\setlength{\rightskip}{0pt plus 5cm}gboolean timer\+\_\+exe (
+\begin{DoxyParamCaption}
+\item[{Gtk\+Widget $\ast$}]{window}
+\end{DoxyParamCaption}
+)}}\label{wave_8c_a4cd40d848edc0f75a94002837921c15a}
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{wave_8c_a4cd40d848edc0f75a94002837921c15a_cgraph}
+\end{center}
+\end{figure}
+
+
