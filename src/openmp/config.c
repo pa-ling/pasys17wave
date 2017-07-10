@@ -13,9 +13,9 @@ double getC()
 
 unsigned int getDataSize()
  {
-     return arraySize;
+    return arraySize;
  }
- 
+
 double getShift()
 {
     return shift;

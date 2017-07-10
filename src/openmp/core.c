@@ -6,8 +6,6 @@
 
 #include "core.h"
 
-#define MAX_X 
-
 double  *values,
         *oldval, 
         *newval;
