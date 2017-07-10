@@ -1,0 +1,143 @@
+\documentclass[12pt,a4paper,ngerman]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{csquotes}
+\MakeOuterQuote{"}
+%
+\usepackage{fancyref}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{makeidx}
+\usepackage{listings}
+
+%
+% PDF settings
+\usepackage[pdftex]{graphicx}
+\usepackage[pdfstartview=FitH,pdftitle={Bachelorarbeit},pdfauthor={Patrick Fehling \& Christian Schütt},
+colorlinks=false, linktocpage]{hyperref}
+\usepackage[a4paper,includeheadfoot,left=2.6cm,right=2.6cm,top=2.54cm,bottom=2.54cm]{geometry}
+\usepackage{array}
+\setlength\extrarowheight{5pt}
+
+\usepackage[nottoc,numbib]{tocbibind}
+\usepackage{hyperref}
+\usepackage{caption}
+
+\usepackage{tabularx}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}} % linksbündig mit Breitenangabe
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}} % zentriert mit Breitenangabe
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}} % rechtsbündig mit Breitenangabe
+
+%for e.g. average symbol
+\usepackage{amssymb}
+\usepackage{float}
+
+%
+% Header and Footer Style
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[R]{\slshape Patrick Fehling \& Cristian Schütt}
+\fancyhead[L]{\slshape\nouppercase{\rightmark}}
+\fancyfoot{}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\renewcommand{\subsectionmark}[1]{} %Remove \subsection from header
+%
+% No identation
+\setlength\headheight{15pt}
+\setlength\parindent{0pt}
+%
+% Custom commands
+\newcommand\zb{z.\,B.\ }
+\renewcommand\dh{d.\,h.\ }
+\newcommand\parbig{\par\bigskip}
+\newcommand\parmed{\par\medskip}
+\newcommand{\mailto}[1]{\href{mailto:#1}{#1}}
+%
+% Java Code Listing Style
+\definecolor{darkblue}{rgb}{0,0,.6}
+\definecolor{darkgreen}{rgb}{0,0.5,0}
+\definecolor{darkred}{rgb}{0.5,0,0}
+\lstset{language=Java, basicstyle=\ttfamily\small\upshape, commentstyle=\color{darkgreen}\sffamily,
+keywordstyle=\color{darkblue}\rmfamily\bfseries, breaklines=true,tabsize=2,xleftmargin=3mm,
+xrightmargin=3mm,numbers=none,frame=none,stringstyle=\color{darkred}, showstringspaces=false}
+
+\begin{document}
+
+\begin{titlepage}
+\thispagestyle{empty}
+
+\begin{center}
+	\includegraphics[width=0.6\textwidth]{pictures/HTW_Logo}
+	
+	\vspace{2cm}
+	
+	\Huge 
+	Parallelisierte Berechnung einer Wellenanimation mit OpenMP und OpemMPI
+	
+	\vspace{2cm}
+	\large
+	Projekt im Fach "Parallel Systems"
+	
+	\vspace{2cm}
+	
+	Prüfer: Sebastian Bauer
+	
+	\vspace{0.5cm}
+	
+	Eingereicht von Patrick Fehling und Christian Schütt
+	
+	\vspace{0.5cm}
+	
+	31.07.2017
+\end{center}
+
+
+\end{titlepage}
+
+\pagestyle{empty}
+
+\tableofcontents
+\setcounter{page}{0}
+
+\clearpage\pagenumbering{arabic}
+\pagestyle{fancy}
+
+
+\section{Einleitung}
+\subsection{Projektzielstellung}
+\subsection{Aufbau der Arbeit}
+
+\section{Grundlagen}
+\subsection{Parallelisierung}
+\subsection{OpenMP}
+\subsection{OpenMPI}
+
+\section{Analyse}
+%wellengleichung
+%Mathematikzeug
+
+\section{Entwurf}
+%zwei Programme --> warum?
+%wie wird seriell ausgeführt?
+%Diagramm des Programms ("Klassendiagramm")
+
+\section{Implementierung}
+%relevante Code-Snippets
+
+\section{Test}
+%manuelle Tests?
+%Testskripte
+
+\section{Evaluation}
+%Vergleich von seriell und parallel
+
+\section{Fazit}
+%Parallelisierung brachte wenig Erfolg
+
+\section{Anhang}
+%Verweis auf repository?
+
+\end{document}
