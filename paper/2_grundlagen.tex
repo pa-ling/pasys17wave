@@ -1,0 +1,29 @@
+% !TEX root = main.tex
+
+\section{Grundlagen}
+
+\subsection{Wellengleichung}
+%TODO Mathematik
+
+\subsection{Parallelisierung}
+Kurz nach der Jahrtausendwende sank die Leistungssteigerung, die bei Einkernprozessoren jedes Jahr erreicht wurde stark ab. Eine Ursache hierfür ist die sog. Power-Wall. Wenn die Taktfrequenz eines Prozessors erhöht wird, muss auch die anliegende Spannung erhöht werden. Dies führt aber dazu, dass mehr Wärme erzeugt wird, welche abgeführt werden muss. Die Power-Wall ist heute im Prinzip schon erreicht. Wenn man jedoch noch mehr Leistung haben will, können Mehrkernprozessoren Abhilfe schaffen.\\
+Ein Großteil der Parallelisierung findet auf der Prozess- oder auf der Threadebene statt. Hier sind große Performance-Verbesserungen möglich. Diese benötigen aber spezielle Anpassungen des Quellcodes. Um diese Anpassungen geringer zu halten stehen viele verschiedene Frameworks zur Verfügung. Zwei davon werden in dieser Arbeit genauer betrachtet.
+
+\subsection{OpenMP}
+Auf einem Computer (PC) befindet sich in der Regel ein eng gekoppeltes Speichersystem, d.h. alle Prozessoren greifen auf den gleichen gemeinsamen globalen Speicher zu, besitzen jedoch auch einen eigenen schnelleren lokalen Speicher (Cache). OpenMP läuft auf genau diesen Systemen.\\
+Die Idee hinter OpenMP ist es Schleifen, die normalerweise sequentiell abgearbeitet werden aufzuteilen und von mehreren Prozessoren ausführen zu lassen. Dies ist natürlich nicht für jede Schleife möglich, weshalb der Entwickler entscheiden muss welche Schleifen parallelisiert ausgeführt werden können, welche nicht und welche vielleicht mit Anpassungen parallelisiert werden können. Eine Schleife wird über Pragma-Direktiven für OpenMP markiert und konfiguriert. Ein Beispiel, das zwei Arrays addiert könnte so aussehen:
+
+\begin{lstlisting}[language=C]
+#pragma omp parallel for
+for (i = 0; i < arrayLength; i++)
+{
+    c[i] = a[i] + b[i];
+}
+\end{lstlisting}
+
+Dabei wird die Schleife auf alle verfügbaren Prozessoren in einem eigenen Thread aufgeteilt, sodass jeder Prozessor in etwa die gleiche Anzahl an Schleifendurchführungen berechnet. Dies ist offensichtlich nur möglich, wenn die Schleifendurchführungen unabhängig voneinander sind.
+
+\subsection{OpenMPI}
+Neben eng gekoppelten Speichersystemen, gibt es auch lose gekoppelte Speichersystem, d.h. es gibt keinen globalen Speicher, sondern jeder Prozessor hat nur seinen eigenen Speicher. Eine Kommunikation erfolgt hier über das Netzwerk. Solche Installationen findet man z.B. in Grids, wo mehrere Rechner wie ein Rechner agieren. Für solche Systeme wurde OpenMPI entwickelt, obwohl es auch auf eng gekoppelten Systemen läuft, indem es eine lose Gekoppeltes simuliert.\\
+Der Kern von OpenMPI ist das Austauschen von Informationen zwischen den Prozessoren über "Nachrichten". In der Regel wird die Anwendung von einem Master- oder Root-Prozess initialisert, welcher dann die Daten, die parallelisiert verarbeitet werden sollen an die zur Verfügung stehenden Worker-Prozesse verteilt und nach der Berechnung wieder erhält.
+%TODO sehr simples Beispiel einfügen?
