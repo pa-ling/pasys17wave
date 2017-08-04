@@ -1,10 +1,26 @@
 % !TEX root = main.tex
 
 \section{Entwurf}
-%zwei Programme --> warum?
-%wie wird seriell ausgeführt?
-%Diagramm des Programms ("Klassendiagramm")
+\subsection{Variantenaufbau}
+Um die verschiedenen Implementierungen möglichst unabhängig voneinander zu testen, haben wir uns dazu entschieden drei separate Programme zu entwickeln. Die sequentielle Variante unterscheidet sich dabei nur gering von der OpenMP-Variante. Die OpenMPI hat jedoch deutliche Unterschiede. Letzteres benötigt zudem einen speziellen Compiler und einen spezielles Programm zum Ausführen. Dies war auch ein Grund für die strikte Trennung der Varianten.\\
+Da die verwendeten Frameworks pimär in der Programmiersprache C vorliegen und diese teilweise auch so in der Vorlesung vorgestellt wurden, haben wir uns auch für diese Sprache entschieden.
 
-\section{Sequentiell und OpenMP}
+\subsection{Programmaufbau}
+C ist eine prozedurale Programmiersprache, d.h. es gibt keine Klassen. Wir haben jedoch unsere Klassenstruktur in Anlehnung an diese entworfen. Dabei unterteilen wir jedes Programm in drei Teile, welche bis auf eine Ausnahme jeweils aus zwei Dateien bestehen (C-Datei und Header-Datei): wave, config und core.
 
-\section{OpenMPI}
+\subsubsection{wave.c}%hier sollten wir vermutlich noch eine header-datei einführen
+Hier findet die Programminitialisierung und hier sind auch alle Methoden und Variablen, die für die grafische Benutzeroberfläche (GUI) verwendet werden, angesiedelt. Für die GUI haben wir uns für das GTK-Framework entschieden. Da es in dieser Arbeit um die Parallelisierung gehen soll, werden wir hierauf aber nicht weiter eingehen.\\
+Die anderen Programmteile werden von hier aus aufgerufen, d.h. der gesamte Programmfluss findet im Prinzip hier statt.
+
+\subsubsection{core.c / core.h}
+Hier findet die Logik des Programms statt.
+
+\subsubsection{config.c / config.h}
+Hier wird die Konfigurationsdatei (i.d.R. "wave.conf") eingelesen und somit dem Programm zur Verfügung gestellt. Zu konfigurierende Parameter sind:
+\begin{itemize}
+	\item C: Der C-Parameter in der Gleichung
+	\item SHIFT: Die Versetzung der initialen Sinuskurven
+	\item ARRAY\_SIZE: Die Anzahl der Punkte der Welle = Länge
+	\item SHOW\_GUI: Boolean-Wert für das Anzeigen der Benutzeroberfläche (GUI)
+	\item SIMULATION\_STEPS: Die Anzahl der auszuführenden Simulationen
+\end{itemize}

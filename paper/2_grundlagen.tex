@@ -3,7 +3,17 @@
 \section{Grundlagen}
 
 \subsection{Wellengleichung}
-%TODO Mathematik
+%TODO Mathematik - z.b. Parameter der Gleichung erklären
+Die Basis der zu entwickelnden Programme bildet folgende Gleichung:
+\begin{quote}
+	$A(i, t + 1) = 2A(i, t) - A(i, t - 1) + c(A(i - 1, t) - 2A(i, t) + A(i + 1, t))$
+\end{quote}
+Dabei ist $t$ der Zeitpunkt Schwingung, $i$ der Index der Welle und A(i,t) steht für die Amplitude zum Zeitpunkt t und am Punkt i.\\
+Klarer wird diese wenn man sich A(i, t+1), also das Ergebnis der Gleichung, als den zukünftigen Wert an der aktuellen Stelle (futureVal) vorstellt. Dann würde die Gleichung ungefähr so aussehen:
+\begin{quote}
+	$futureVal = 2 * presentVal - pastVal + c * (presentLeftNeighbourVal - 2 * presentVal + presentRightNeighbourVal)$
+\end{quote} 
+Die Variable C ist eine Konstante, welche der Schrittweite zwischen zwei benachbarten Zeitpunkten t entspricht. Damit kann die Geschwindigkeit der Wellenbewegung beeinflusst werden.
 
 \subsection{Parallelisierung}
 Kurz nach der Jahrtausendwende sank die Leistungssteigerung, die bei Einkernprozessoren jedes Jahr erreicht wurde stark ab. Eine Ursache hierfür ist die sog. Power-Wall. Wenn die Taktfrequenz eines Prozessors erhöht wird, muss auch die anliegende Spannung erhöht werden. Dies führt aber dazu, dass mehr Wärme erzeugt wird, welche abgeführt werden muss. Die Power-Wall ist heute im Prinzip schon erreicht. Wenn man jedoch noch mehr Leistung haben will, können Mehrkernprozessoren Abhilfe schaffen.\\
