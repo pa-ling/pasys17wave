@@ -3,7 +3,7 @@
 \usepackage[ngerman]{babel}
 \usepackage{csquotes}
 \MakeOuterQuote{"}
-%
+
 \usepackage{fancyref}
 \usepackage{fancyhdr}
 \usepackage{xcolor}
@@ -11,7 +11,6 @@
 \usepackage{makeidx}
 \usepackage{listings}
 
-%
 % PDF settings
 \usepackage[pdftex]{graphicx}
 \usepackage[pdfstartview=FitH,pdftitle={Bachelorarbeit},pdfauthor={Patrick Fehling \& Christian Schütt},
@@ -33,7 +32,6 @@ colorlinks=false, linktocpage]{hyperref}
 \usepackage{amssymb}
 \usepackage{float}
 
-%
 % Header and Footer Style
 \pagestyle{fancy}
 \fancyhead{}
@@ -44,25 +42,25 @@ colorlinks=false, linktocpage]{hyperref}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
 \renewcommand{\subsectionmark}[1]{} %Remove \subsection from header
-%
+
 % No identation
 \setlength\headheight{15pt}
 \setlength\parindent{0pt}
-%
+
 % Custom commands
 \newcommand\zb{z.\,B.\ }
 \renewcommand\dh{d.\,h.\ }
 \newcommand\parbig{\par\bigskip}
 \newcommand\parmed{\par\medskip}
 \newcommand{\mailto}[1]{\href{mailto:#1}{#1}}
-%
+
 % Java Code Listing Style
 \definecolor{darkblue}{rgb}{0,0,.6}
 \definecolor{darkgreen}{rgb}{0,0.5,0}
 \definecolor{darkred}{rgb}{0.5,0,0}
-\lstset{language=Java, basicstyle=\ttfamily\small\upshape, commentstyle=\color{darkgreen}\sffamily,
-keywordstyle=\color{darkblue}\rmfamily\bfseries, breaklines=true,tabsize=2,xleftmargin=3mm,
-xrightmargin=3mm,numbers=none,frame=none,stringstyle=\color{darkred}, showstringspaces=false}
+
+\lstset{basicstyle=\ttfamily\small\upshape, commentstyle=\color{darkgreen}\sffamily, keywordstyle=\color{darkblue}\rmfamily\bfseries, breaklines=true, tabsize=2, xleftmargin=3mm,
+xrightmargin=3mm, stringstyle=\color{darkred}, showstringspaces=false}
 
 \begin{document}
 
@@ -75,7 +73,7 @@ xrightmargin=3mm,numbers=none,frame=none,stringstyle=\color{darkred}, showstring
 	\vspace{2cm}
 	
 	\Huge 
-	Parallelisierte Visualisierung der Schwingung einer Gitarrensaite auf Grundlage der Wellengleichung mit OpenMP und OpemMPI
+	Parallelisierte Visualisierung der Schwingung einer Gitarrensaite auf Grundlage der Wellengleichung mit OpenMP und OpenMPI
 	
 	\vspace{2cm}
 	\large
@@ -91,7 +89,7 @@ xrightmargin=3mm,numbers=none,frame=none,stringstyle=\color{darkred}, showstring
 	
 	\vspace{0.5cm}
 	
-	31.07.2017
+	\today
 \end{center}
 
 

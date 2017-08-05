@@ -1,6 +1,42 @@
 % !TEX root = main.tex
 
 \section{Implementierung}
+%TODO Text ergänzen
 \subsection{Sequentiell}
+\begin{lstlisting}[language=C]
+for (int i = 1; i < arrLen-1; i++)
+	newval[i] = (2 * values[i]) - oldval[i] + c * (values[i-1] - (2 * values[i]) + values[i+1]);
+
+for (int i = 1; i < arrLen-1; i++) 
+{
+	oldval[i] = values[i];
+	values[i] = newval[i];
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=C]
+for (int i = 1; i < arrLen-1; i++)
+{
+	if (0 == mode)
+		newval[i] = (2 * values[i]) - oldval[i] + c * (values[i-1] - (2 * values[i]) + values[i+1]);
+	else if (1 == mode)
+		oldval[i] = (2 * newval[i]) - values[i] + c * (newval[i-1] - (2 * newval[i]) + newval[i+1]);
+	else
+		values[i] = (2 * oldval[i]) - newval[i] + c * (oldval[i-1] - (2 * oldval[i]) + oldval[i+1]);
+}
+mode++;
+if (2 < mode)
+	mode = 0;
+\end{lstlisting}
+
 \subsection{OpenMP}
+\begin{lstlisting}[language=C]
+#pragma omp parallel for
+for (int i = 1; i < arrLen-1; i++)
+[...]
+
+\end{lstlisting}
+
+
 \subsection{OpenMPI}
+%TODO

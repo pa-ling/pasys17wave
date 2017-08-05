@@ -2,8 +2,7 @@
 
 \section{Grundlagen}
 
-\subsection{Wellengleichung}
-%TODO Mathematik - z.b. Parameter der Gleichung erklären
+\subsection{Wellengleichung}\label{sec:wave_equation}
 Die Basis der zu entwickelnden Programme bildet folgende Gleichung:
 \begin{quote}
 	$A(i, t + 1) = 2A(i, t) - A(i, t - 1) + c(A(i - 1, t) - 2A(i, t) + A(i + 1, t))$
@@ -26,9 +25,7 @@ Die Idee hinter OpenMP ist es Schleifen, die normalerweise sequentiell abgearbei
 \begin{lstlisting}[language=C]
 #pragma omp parallel for
 for (i = 0; i < arrayLength; i++)
-{
     c[i] = a[i] + b[i];
-}
 \end{lstlisting}
 
 Dabei wird die Schleife auf alle verfügbaren Prozessoren in einem eigenen Thread aufgeteilt, sodass jeder Prozessor in etwa die gleiche Anzahl an Schleifendurchführungen berechnet. Dies ist offensichtlich nur möglich, wenn die Schleifendurchführungen unabhängig voneinander sind.

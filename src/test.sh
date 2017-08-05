@@ -26,10 +26,9 @@ function calculateAverage {
 }
 
 #calculateAverage <OMP_NUM_THREADS> <CONFIG_FILE> <ARRAY_SIZE> <STEP_SIZE>
-
+simulations=1000
 echo "OMP_NUM_THREADS=1"
 threads="1"
-simulations=1000
 calculateAverage $threads $configFile 0 $simulations
 calculateAverage $threads $configFile 500000 $simulations
 calculateAverage $threads $configFile 1000000 $simulations
@@ -40,7 +39,6 @@ calculateAverage $threads $configFile 20000000 $simulations
 
 echo "OMP_NUM_THREADS=2"
 threads="2"
-simulations=1000
 calculateAverage $threads $configFile 0 $simulations
 calculateAverage $threads $configFile 500000 $simulations
 calculateAverage $threads $configFile 1000000 $simulations
