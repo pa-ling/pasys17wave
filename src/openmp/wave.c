@@ -1,29 +1,5 @@
-#include <gtk/gtk.h>
-#include <unistd.h>
-#include <pthread.h>
-#include "core.h"
-#include "config.h"
+#include "wave.h"
 
-#define X_OFFSET 40
-#define Y_OFFSET 20
-#define MAGNIFICATION 50
-#define WINDOW_WIDTH 1200
-#define WINDOW_HEIGHT 315
-
-gboolean on_window_configure_event(GtkWidget * da, GdkEventConfigure * event, gpointer user_data);
-gboolean on_window_expose_event(GtkWidget * da, GdkEventExpose * event, gpointer user_data);
-void close_window(void);
-void *do_draw(void *ptr);
-gboolean timer_exe(GtkWidget * window);
-
-static GdkPixmap *pixmap = NULL; //serves as our buffer
-static int currently_drawing = 0;
-static unsigned int currentSimulationStep = 0;
-
-/* 
- * Is executed when the window's size, position or stacking is changed.
- * If necessary, creates a new properly sized pixmap and destroys the old one.
- */
 gboolean on_window_configure_event(GtkWidget * da, GdkEventConfigure * event, gpointer user_data)
 {
     static int oldw = 0;
@@ -50,9 +26,6 @@ gboolean on_window_configure_event(GtkWidget * da, GdkEventConfigure * event, gp
     return TRUE;
 }
 
-/*
- * Is executed when the window is going to be redrawn.
- */
 gboolean on_window_expose_event(GtkWidget * da, GdkEventExpose * event, gpointer user_data)
 {
     gdk_draw_drawable(da->window,
@@ -231,7 +204,6 @@ int main (int argc, char *argv[])
 
     GtkWidget *window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title(GTK_WINDOW(window), "Wave Equation");
-    //gtk_window_set_resizable(GTK_WINDOW(window), FALSE);
     gtk_widget_set_size_request(window, WINDOW_WIDTH, WINDOW_HEIGHT);
     g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(close_window), NULL);
     g_signal_connect(G_OBJECT(window), "expose_event", G_CALLBACK(on_window_expose_event), NULL);

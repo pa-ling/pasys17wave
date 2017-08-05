@@ -8,8 +8,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define assertEqualsDouble(expected, actual, epsilon) (assert(fabs((expected) - (actual)) < epsilon));
-
 /**
   * Initializes the wave with the results of a sinus function.
   *

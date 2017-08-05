@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 program="./openmp/wave"
 configFile="./openmp/wave.conf"
 resultsFile="results.txt"
