@@ -3,6 +3,7 @@
 \section{Grundlagen}
 
 \subsection{Wellengleichung}\label{sec:wave_equation}
+%TODO: Überarbeiten --> zweite Gleichung rausnehmen und als Text schreiben
 Die Basis der zu entwickelnden Programme bildet folgende Gleichung:
 \begin{quote}
 	$A(i, t + 1) = 2A(i, t) - A(i, t - 1) + c(A(i - 1, t) - 2A(i, t) + A(i + 1, t))$
@@ -34,3 +35,8 @@ Dabei wird die Schleife auf alle verfügbaren Prozessoren in einem eigenen Threa
 Neben eng gekoppelten Speichersystemen, gibt es auch lose gekoppelte Speichersystem, d.h. es gibt keinen globalen Speicher, sondern jeder Prozessor hat nur seinen eigenen Speicher. Eine Kommunikation erfolgt hier über das Netzwerk. Solche Installationen findet man z.B. in Grids, wo mehrere Rechner wie ein Rechner agieren. Für solche Systeme wurde OpenMPI entwickelt, obwohl es auch auf eng gekoppelten Systemen läuft, indem es eine lose Gekoppeltes simuliert.\\
 Der Kern von OpenMPI ist das Austauschen von Informationen zwischen den Prozessoren über "Nachrichten". In der Regel wird die Anwendung von einem Master- oder Root-Prozess initialisert, welcher dann die Daten, die parallelisiert verarbeitet werden sollen an die zur Verfügung stehenden Worker-Prozesse verteilt und nach der Berechnung wieder erhält.
 %TODO sehr simples Beispiel einfügen?
+
+\subsection {False Sharing}
+Ein wichtiger Punkt bei der Entwicklung von parallelisiert Anwendungen ist das False-Sharing-Problem, welches dazu führen kann das eine parallelisierte Anwendung langsamer läuft als ihre entsprechende sequentielle Anwendung.\\
+Jeder Prozessor hat einen Cache, welcher sehr viele schnellere Zugriffszeiten bietet als der Arbeitsspeicher. Wenn der Prozessor einen Wert einliest, schreibt er diesen zunächst in seinen Cache und arbeitet von dort aus mit diesem. Wenn jetzt ein anderer Prozessor den selben Wert überschreibt, muss der erste Prozessor den aktualisierten Wert wieder aus dem langsameren Arbeitsspeicher laden.\\
+In einem Programm in dem abwechselnd zwei Threads immer auf den gleichen Wert schreiben, führt dies dazu, dass der Cache quasi obsolet wird, da jeder Wert aus dem Arbeitsspeicher gelesen werden muss. Das wiederum hat zur Folge, dass das Programm sehr langsam wird.

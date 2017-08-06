@@ -8,3 +8,48 @@
 \subsection{manuelle Tests}
 \subsection{automatisierte Tests}
 \subsection{Auswertung der Tests}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}
+	\begin{axis}[
+		%values
+		xlabel = {Punktmenge},
+		ylabel = {Zeit},
+		xmin = 0, xmax = 20000000,
+		ymin = 0, ymax = 100,
+		xtick = {0, 5000000, 10000000, 15000000, 20000000},
+		ytick = {0, 25, 50, 75, 100},
+		%appearance
+		legend pos = north west, %alternatives: e.g. (outer) north east
+		legend style = {draw=none},
+		ymajorgrids = true,
+		xmajorgrids = true,
+		axis lines = left,
+		grid style = solid,
+		width = 13 cm,
+		height = 8 cm
+	]
+	
+	\legend{Sequentiell, OpenMP (2 Kerne), OpenMPI (2 Kerne)}
+	
+	\addplot[color=blue,mark=square*]
+	coordinates {
+		(0,0)(1000000,10)(5000000,24)(10000000,49)(20000000,85)
+	};
+	
+	\addplot[color=red,mark=square*]
+	coordinates {
+		(0,0)(1000000,10)(5000000,23)(10000000,48)(20000000,80)
+	};
+
+	\addplot[color=darkgreen,mark=square*]
+	coordinates {
+		(0,0)(1000000,10)(5000000,10)(10000000,10)(20000000,10)
+	};
+	
+	\end{axis}
+	\end{tikzpicture}
+	\caption{Vergleich der Varianten}
+	\label{fig:diagram1}
+\end{figure}

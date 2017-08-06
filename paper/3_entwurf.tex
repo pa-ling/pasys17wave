@@ -1,7 +1,7 @@
 % !TEX root = main.tex
 
 \section{Entwurf}
-%Hier sollten noch Abbildungen und/oder Schemen hinzugefügt werden
+%Hier sollten noch Abbildungen und/oder Schemen hinzugefügt werden --> Klassendiagramm??? Wäre wahrscheinlich falsch, weil C
 \subsection{Variantenaufbau}
 Um die verschiedenen Implementierungen möglichst unabhängig voneinander zu testen, haben wir uns dazu entschieden drei separate Programme zu entwickeln. Die sequentielle Variante unterscheidet sich dabei nur gering von der OpenMP-Variante. Die OpenMPI hat jedoch deutliche Unterschiede. Letzteres benötigt zudem einen speziellen Compiler und einen spezielles Programm zum Ausführen. Dies war auch ein Grund für die strikte Trennung der Varianten.\\
 Da die verwendeten Frameworks pimär in der Programmiersprache C vorliegen und diese teilweise auch so in der Vorlesung vorgestellt wurden, haben wir uns auch für diese Sprache entschieden.
@@ -10,21 +10,21 @@ Da die verwendeten Frameworks pimär in der Programmiersprache C vorliegen und d
 C ist eine prozedurale Programmiersprache, d.h. es gibt keine Klassen. Wir haben jedoch unsere Klassenstruktur in Anlehnung an diese entworfen. Dabei unterteilen wir jedes Programm in drei Teile, welche aus jeweils zwei Dateien bestehen (C-Datei und Header-Datei): wave, config und core.
 
 \subsubsection{wave.c / wave.h}
-Hier findet die Programminitialisierung und hier sind auch alle Methoden und Variablen, die für die grafische Benutzeroberfläche (GUI) verwendet werden, angesiedelt. Für die GUI haben wir uns für das GTK-Framework entschieden. Da es in dieser Arbeit um die Parallelisierung gehen soll, werden wir hierauf aber nicht weiter eingehen.\\
-Die anderen Programmteile werden von hier aus aufgerufen, d.h. der gesamte Programmfluss findet im Prinzip hier statt.
+Hier findet die Programminitialisierung und hier sind auch alle Methoden und Variablen, die für die grafische Benutzeroberfläche (GUI) verwendet werden, angesiedelt. Für die GUI haben wir uns für das GTK-Framework entschieden. Die einzige Vorgabe die wir uns hier zunächst gemacht haben, ist dass die GUI möglichst wie die Vorgabe aus der Aufgabenstellung aussehen soll. Da es in dieser Arbeit um die Parallelisierung gehen soll, werden wir nicht auf Details eingehen.\\
+Die anderen Programmteile werden von hier aus aufgerufen, d.h. der gesamte Programmfluss findet im Prinzip hier statt bzw. wird von hier gesteuert.
 
 \subsubsection{core.c / core.h}
 Hier findet die Logik des Programms statt. Hier liegen drei Arrays die den Verlauf der Welle darstellen. Dabei stellt eins die Vergangenheit, eins die Gegenwart und eins die Zukunft dar. Die Arrays der Vergangenheit und der Gegenwart werden initial mit einer Sinuskurve beschrieben. Wobei eine der Sinuskurven eine Verschiebung aufweisen kann, sodass eine Dynamik in der Animation entsteht.\\
-Die Werte der Zukunft werden dann immer mithilfe der in Abschnitt \ref{sec:wave_equation} vorgestellten Gleichung und den Werten der Gegenwart und der Vergangenheit berechnet. Nach einer Berechnung werden die gegenwärtigen Werte zur vergangenen und die gerade Berechneten sind die neuen Werte der Gegenwart.
+Die Werte der Zukunft werden dann immer mithilfe der in Abschnitt \ref{sec:wave_equation} vorgestellten Gleichung und den Werten der Gegenwart und der Vergangenheit berechnet. Nach einer Berechnung werden die gegenwärtigen Werte zur vergangenen und die gerade Berechneten sind die neuen Werte der Gegenwart. Im Folgenden wird solch eine Berechnung als Simulationsschritt bezeichnet.
 
 \subsubsection{config.c / config.h}
 Hier wird die Konfigurationsdatei (i.d.R. "wave.conf") eingelesen und somit dem Programm zur Verfügung gestellt. Zu konfigurierende Parameter sind:
 \begin{itemize}
-	\item C: Der C-Parameter in der Gleichung
-	\item SHIFT: Die Versetzung der initialen Sinuskurven
-	\item ARRAY\_SIZE: Die Anzahl der Punkte der Welle = Länge
+	\item C: Integer-Wert für den C-Parameter in der Gleichung
+	\item SHIFT: Integer-Wert für die Versetzung der initialen Sinuskurven
+	\item ARRAY\_SIZE: Integer-Wert für Anzahl der Punkte der Welle = Länge
 	\item SHOW\_GUI: Boolean-Wert für das Anzeigen der Benutzeroberfläche (GUI)
-	\item SIMULATION\_STEPS: Die Anzahl der auszuführenden Simulationen
+	\item SIMULATION\_STEPS: Integer-Wert für die Anzahl der Simulationsschritte
 \end{itemize}
 
 \subsection{OpenMPI}
