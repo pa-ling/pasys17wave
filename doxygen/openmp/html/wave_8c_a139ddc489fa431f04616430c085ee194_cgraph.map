@@ -1,6 +1,0 @@
-<map id="do_draw" name="do_draw">
-<area shape="rect" id="node2" href="$core_8c.html#a1f451daf160cbacfab1e7b495789750e" title="simulate" alt="" coords="156,5,227,32"/>
-<area shape="rect" id="node3" href="$config_8c.html#a9d725f3bbbc35aaf72f2631cc8fc624f" title="getSimulationSteps" alt="" coords="124,56,259,83"/>
-<area shape="rect" id="node4" href="$core_8c.html#a52f1b48db944eec28aa0e073d6696c6e" title="getNewValues" alt="" coords="138,107,245,133"/>
-<area shape="rect" id="node5" href="$core_8c.html#a1779d5453fa635501dab78cf8c15a878" title="getArraySize" alt="" coords="143,157,240,184"/>
-</map>
