@@ -1,3 +1,10 @@
+/**
+ * @file core.h
+ * @author Christian Schütt (Patrick Fehling)
+ * @date 7 Aug 2017
+ * @brief File containing calculation logic
+ */
+
 #ifndef _CORE_H
 #define _CORE_H
 

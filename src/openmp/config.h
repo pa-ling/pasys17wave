@@ -1,3 +1,10 @@
+/**
+ * @file config.h
+ * @author Patrick Fehling (Christian Schütt)
+ * @date 7 Aug 2017
+ * @brief File containing functionality to read the config file
+ */
+
 #ifndef _CONFIG_H
 #define _CONFIG_H
 
@@ -50,6 +57,7 @@ bool isGui(void);
   *
   * @param argc argument count of program
   * @param argv arguments of program
+  * @return 0 if succesful, 1 if not
   */
 int readConfig(int argc, char *argv[]);
 

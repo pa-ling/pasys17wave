@@ -1,9 +1,3 @@
-/**
- * Implements the core of the algorithm.
- *
- * @file core.c
- */
-
 #include "core.h"
 
 double  *values,

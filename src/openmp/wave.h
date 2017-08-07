@@ -1,3 +1,10 @@
+/**
+ * @file config.h
+ * @author Patrick Fehling
+ * @date 7 Aug 2017
+ * @brief File which initializes the program and presents a GUI to the user
+ */
+
 #include <gtk/gtk.h>
 #include <unistd.h>
 #include <pthread.h>
@@ -18,6 +25,7 @@
  * @param da the drawable gtk-widget
  * @param event additional data of the configure event (e.g. width, height of the window)
  * @param user_data unused
+ * @return unused
  */
 gboolean on_window_configure_event(GtkWidget * da, GdkEventConfigure * event, gpointer user_data);
 
@@ -28,6 +36,7 @@ gboolean on_window_configure_event(GtkWidget * da, GdkEventConfigure * event, gp
  * @param da the drawable gtk-widget
  * @param event additional data of the expose event (e.g. width, height of the window)
  * @param user_data unused
+ * @return unused
  */
 gboolean on_window_expose_event(GtkWidget * da, GdkEventExpose * event, gpointer user_data);
 
@@ -48,6 +57,7 @@ void *do_draw(void *ptr);
  * Triggers a new simulation step and a redrawing.
  *
  * @param window the application window
+ * @return unused
  */
 gboolean timer_exe(GtkWidget * window);
 
