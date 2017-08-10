@@ -6,52 +6,100 @@
 %Vergleich von seriell und parallel
 
 \subsection{manuelle Tests}
-
+Da die geschrieben Programme nicht sehr groß und keine hohe Komplexität aufweisen, haben wir uns gegen Unit-Tests entschieden und testen von daher immer nur das komplette Programm bzw. rufen das Programm auf und nicht nur einen Teil (z.B. eine Funktion) auf.
+Um verschiedene Konfigurationen der Anwendung zu testen gibt es mehrere Möglichkeiten. Man bearbeitet die Konfigurationsdatei entsprechend des Testszenarios und führt das Programm dann aus. Standardmäßig wird hierbei die Konfigurationsdatei "wave.conf" eingelesen. Es ist jedoch auch möglich als erstes Programmargument eine andere Konfigurationsdatei anzugeben. Schließlich kann OpenMP und auch OpenMPI über einen entsprechenden Parameter die Anzahl der zu nutzenden Threads/Prozesse übergeben werden.\\
+%Hier grobe Angaben zur Testmaschine
 
 \subsection{automatisierte Tests}
-\subsection{Auswertung der Tests}
+Um schneller die Konfiguration zu ändern ist es zusätzlich möglich die Größe des Arrays (ARRAY\_SIZE) und die Anzahl der Simulationsschritte (SIMULATION\_STEPS) als zweites und drittes Programmargument anzugeben. Dieses Vorgehen ist jedoch nur für die automatisierten Tests gedacht. Dazu haben wir ein Shell-Skript erzeugt, welches welches ein Programm mit mehreren Konfigurationen ausführt. Details hierzu gibt es im nächsten Abschnitt.\\
+Jede Konfiguration wird dabei zehn mal ausgeführt. Dabei wird die Zeit gemessen und nach den zehn Durchläufen wird die Durschnittszeit ermittelt und in eine Text-Datei geschrieben.
+%Hier Angaben zum Testvorgehen und den Testwerten machen;
+
+\subsection{Auswertung der Tests} %Alle Koordinatenpaare in diesem Abschnitt sollten überprüft/angepasst werden
 
 \begin{figure}[H]
 	\centering
 	\begin{tikzpicture}
-	\begin{axis}[
+		\begin{axis}[
+			%values
+			xlabel = {Punktmenge},
+			ylabel = {Zeit},
+			xmin = 0, xmax = 20000000,
+			ymin = 0, ymax = 100,
+			xtick = {0, 5000000, 10000000, 15000000, 20000000},
+			ytick = {0, 25, 50, 75, 100},
+			%appearance
+			legend pos = north west, %alternatives: e.g. (outer) north east
+			legend cell align = left,
+			legend style = {draw=none, font=\small},
+			ymajorgrids = true,
+			xmajorgrids = true,
+			axis lines = left,
+			grid style = solid,
+			width = 13 cm,
+			height = 8 cm
+		]
+		
+		\legend{Sequentiell, OpenMP (2 Kerne), OpenMPI (2 Kerne)}
+		
+		\addplot[color=blue,mark=square*]
+		coordinates {
+			(0,0)(1000000,10)(5000000,24)(10000000,49)(20000000,85)
+		};
+		
+		\addplot[color=red,mark=square*]
+		coordinates {
+			(0,0)(1000000,10)(5000000,23)(10000000,48)(20000000,80)
+		};
+	
+		\addplot[color=darkgreen,mark=square*]
+		coordinates {
+			(0,0)(1000000,10)(5000000,10)(10000000,10)(20000000,10)
+		};
+		
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Zeit-Vergleich der Varianten für bestimmte Punktmengen}
+	\label{fig:diagram1}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
 		%values
 		xlabel = {Punktmenge},
-		ylabel = {Zeit},
+		ylabel = {SpeedUp},
 		xmin = 0, xmax = 20000000,
 		ymin = 0, ymax = 100,
 		xtick = {0, 5000000, 10000000, 15000000, 20000000},
 		ytick = {0, 25, 50, 75, 100},
 		%appearance
 		legend pos = north west, %alternatives: e.g. (outer) north east
-		legend style = {draw=none},
+		legend cell align = left,
+		legend style = {draw=none, font=\small},
 		ymajorgrids = true,
 		xmajorgrids = true,
 		axis lines = left,
 		grid style = solid,
 		width = 13 cm,
 		height = 8 cm
-	]
-	
-	\legend{Sequentiell, OpenMP (2 Kerne), OpenMPI (2 Kerne)}
-	
-	\addplot[color=blue,mark=square*]
-	coordinates {
-		(0,0)(1000000,10)(5000000,24)(10000000,49)(20000000,85)
-	};
-	
-	\addplot[color=red,mark=square*]
-	coordinates {
-		(0,0)(1000000,10)(5000000,23)(10000000,48)(20000000,80)
-	};
-
-	\addplot[color=darkgreen,mark=square*]
-	coordinates {
-		(0,0)(1000000,10)(5000000,10)(10000000,10)(20000000,10)
-	};
-	
-	\end{axis}
+		]
+		
+		\legend{Seq. $\rightarrow$ OpenMP (2 Kerne), Seq. $\rightarrow$ OpenMPI (2 Kerne)}
+		
+		\addplot[color=red,mark=square*]
+		coordinates {
+			(0,0)(1000000,10)(5000000,23)(10000000,48)(20000000,80)
+		};
+		
+		\addplot[color=darkgreen,mark=square*]
+		coordinates {
+			(0,0)(1000000,10)(5000000,10)(10000000,10)(20000000,10)
+		};
+		
+		\end{axis}
 	\end{tikzpicture}
-	\caption{Vergleich der Varianten}
+	\caption{SpeedUp-Vergleich von OpenMP und OpenMPI}
 	\label{fig:diagram1}
 \end{figure}
