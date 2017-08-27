@@ -5,12 +5,12 @@
 %Testskripte
 %Vergleich von seriell und parallel
 
-\subsection{manuelle Tests}
+\subsection{Manuelle Tests}
 Da die geschrieben Programme nicht sehr groß und keine hohe Komplexität aufweisen, haben wir uns gegen Unit-Tests entschieden und testen von daher immer nur das komplette Programm bzw. rufen das Programm auf und nicht nur einen Teil (z.B. eine Funktion) auf.
 Um verschiedene Konfigurationen der Anwendung zu testen gibt es mehrere Möglichkeiten. Man bearbeitet die Konfigurationsdatei entsprechend des Testszenarios und führt das Programm dann aus. Standardmäßig wird hierbei die Konfigurationsdatei "wave.conf" eingelesen. Es ist jedoch auch möglich als erstes Programmargument eine andere Konfigurationsdatei anzugeben. Schließlich kann OpenMP und auch OpenMPI über einen entsprechenden Parameter die Anzahl der zu nutzenden Threads/Prozesse übergeben werden.\\
 %Hier grobe Angaben zur Testmaschine
 
-\subsection{automatisierte Tests}
+\subsection{Automatisierte Tests}
 Um schneller die Konfiguration zu ändern ist es zusätzlich möglich die Größe des Arrays (ARRAY\_SIZE) und die Anzahl der Simulationsschritte (SIMULATION\_STEPS) als zweites und drittes Programmargument anzugeben. Dieses Vorgehen ist jedoch nur für die automatisierten Tests gedacht. Dazu haben wir ein Shell-Skript erzeugt, welches welches ein Programm mit mehreren Konfigurationen ausführt. Details hierzu gibt es im nächsten Abschnitt.\\
 Jede Konfiguration wird dabei zehn mal ausgeführt. Dabei wird die Zeit gemessen und nach den zehn Durchläufen wird die Durschnittszeit ermittelt und in eine Text-Datei geschrieben.
 %Hier Angaben zum Testvorgehen und den Testwerten machen;
@@ -54,7 +54,7 @@ Jede Konfiguration wird dabei zehn mal ausgeführt. Dabei wird die Zeit gemessen
 	
 		\addplot[color=darkgreen,mark=square*]
 		coordinates {
-			(0,0)(1000000,10)(5000000,10)(10000000,10)(20000000,10)
+			(0,0)(1000000,8)(5000000,41)(10000000,81)(20000000,158)
 		};
 		
 		\end{axis}
@@ -95,7 +95,7 @@ Jede Konfiguration wird dabei zehn mal ausgeführt. Dabei wird die Zeit gemessen
 		
 		\addplot[color=darkgreen,mark=square*]
 		coordinates {
-			(0,0)(1000000,10)(5000000,10)(10000000,10)(20000000,10)
+			(0,0)(1000000,8)(5000000,41)(10000000,81)(20000000,158)
 		};
 		
 		\end{axis}

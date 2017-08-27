@@ -54,7 +54,52 @@ for (int i = 1; i < arrLen-1; i++)
 In diesem Fall werden alle Variablen bis auf "i", da diese erst im Scope der Schleife deklariert wird, als global oder shared angesehen. Wir hatten hier die Vermutung, dass wir deshalb auch vom False-Sharing-Problem betroffen sein könnten. Aufgrund der Größe der Arrays und der Art wie OpenMP die Arrays aufteilt sollte dies aber nicht der Fall sein.
 
 \subsection{OpenMPI}
-%TODO
+Die Implementierung der verteilten Wellensimulation hat einige Änderungen und Ergänzungen am Basiscode des Projekts nötig gemacht. So wird die Simulationsfunktion fortan für ein abgestecktes Interval von linken zum rechten Ende des vorgegebenen Bereich durchgeführt. Damit wird sichergestellt, dass jeder Worker-Thread ausschließlich den eigenen Simulationsbereich bearbeitet.
+
+\begin{lstlisting}[language=C]
+void simulate(int leftEnd, int rightEnd)
+{
+for (int i = leftEnd; i < rightEnd; i++)
+{
+	newval[i] = (2 * values[i]) - oldval[i] + c * (values[i - 1] - (2 * values[i]) + values[i + 1]);
+}
+\end{lstlisting}
+
+Um den Nachrichtenaustausch zwischen Master- und Worker-Threads übersichtlicher zu gestalten wurden Wrapper-funktionen, die den gesamten Kommunikationsprozess verwalten, entwickelt. Jede dieser Wrapper-funktionen besitzt dabei einen Antagonisten. Hierbei gehören die Funktionen scatterChunksToWorker und rxChunkFromMaster, sowie collectChunksFromWorkers und txChunksToMaster untrennbar zusammen. Durch den Aufruf einer dieser Funktionen auf der Master- oder Worker-Seite wird ein Aufruf der Antagonisten für den fehlerfreien Ablauf der Simulation verpflichtend.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{pictures/MessagePassingManagement.png}
+	\caption{Management der Kommunikations}
+	\label{fig:ManagementMessages}
+\end{figure}
+
+Die Wrapperfunktionen verwenden hierbei bei der Ausführung die OpenMPI-Funktionen Send und Receive, welche im Kapitel 2.4 näher erläutert wurden. Exemplarisch wird der Nachrichtenaustausch am Beispiel der nachfolgenden Code-fragmente der Funktionen CollectChunkFromWorker und txChunkToMaster beleuchtet.
+
+\begin{lstlisting}[language=C]
+void txChunksToMaster()
+{
+	MPI_Send(&offset, 1, MPI_INT, MASTER, 0, MPI_COMM_WORLD);
+	MPI_Send(&oldval[offset], chunksize, MPI_DOUBLE, MASTER, 0, MPI_COMM_WORLD);
+	MPI_Send(&values[offset], chunksize, MPI_DOUBLE, MASTER, 0, 	MPI_COMM_WORLD);
+}
+\end{lstlisting}
+
+Die Funktion txChunksToMaster birgt die Sendefunktionen und wird ausschließlich von Worker-Threads aufgerufen. Das Sendeziel bildet hierbei der Master-Thread. Bei der Ausführung der Funktion wird zuerst das Worker-eigenen Offset des simulierten Wellenabschnittes übertragen. Danach werden zwei Arrays der Länge des eines Chunks übermittelt. Die übertragenen Arrays sind die alten und aktuellen Werte des zugeteilten Wellenabschnittes. Sinnvoll wird der Aufruf von txChunkToMaster erst nach der Ausführung eines Simulationsschrittes mit Hilfe der Funktion exeSimulationOnChunk.   
+
+\begin{lstlisting}[language=C]
+void collectChunksFromWorkers(int numtasks)
+{
+	for (int source = 1; source < numtasks; source++)
+	{
+		MPI_Recv(&offset, 1, MPI_INT, source, 0, MPI_COMM_WORLD, &status);
+		MPI_Recv(&oldval[offset], chunksize, MPI_DOUBLE, source, 0, MPI_COMM_WORLD, 	&status);
+		MPI_Recv(&values[offset], chunksize, MPI_DOUBLE, source, 0, MPI_COMM_WORLD, 	&status);
+	}
+}
+\end{lstlisting}
+
+Der Antagonist zu txChunksToMaster stellt die Funktion collectChunksFromWorkers dar. Hierbei werden alle Chunks der Worker-Threads eingesammelt. Das Einsammeln wird mit der Funktion Receive realisiert. Zuerst wird das Offset des jeweilig sendenen Worker-threads empfangen. Dadurch kann für die nachfolgend empfangenen Arrays ein Update der richtigen Punkte des Master-thread eigenen Datenstrukturen erfolgen. Somit wird durch den Aufruf innerhalb einer Schleife ein aktuelles Bild der Welle auf dem Master-Thread gebildet. Dazu werden nacheinander alle Werte der Worker-Thread eingesammelt.
 
 
 \subsection{Benutzeroberfläche}
