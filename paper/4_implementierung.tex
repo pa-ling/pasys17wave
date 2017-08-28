@@ -59,13 +59,14 @@ Die Implementierung der verteilten Wellensimulation hat einige Änderungen und E
 \begin{lstlisting}[language=C]
 void simulate(int leftEnd, int rightEnd)
 {
-for (int i = leftEnd; i < rightEnd; i++)
-{
-	newval[i] = (2 * values[i]) - oldval[i] + c * (values[i - 1] - (2 * values[i]) + values[i + 1]);
+	for (int i = leftEnd; i < rightEnd; i++)
+	{
+		newval[i] = (2 * values[i]) - oldval[i] + c * (values[i - 1] - (2 * values[i]) + values[i + 1]);
+	}
 }
 \end{lstlisting}
 
-Um den Nachrichtenaustausch zwischen Master- und Worker-Threads übersichtlicher zu gestalten wurden Wrapper-funktionen, die den gesamten Kommunikationsprozess verwalten, entwickelt. Jede dieser Wrapper-funktionen besitzt dabei einen Antagonisten. Hierbei gehören die Funktionen scatterChunksToWorker und rxChunkFromMaster, sowie collectChunksFromWorkers und txChunksToMaster untrennbar zusammen. Durch den Aufruf einer dieser Funktionen auf der Master- oder Worker-Seite wird ein Aufruf der Antagonisten für den fehlerfreien Ablauf der Simulation verpflichtend.
+Um den Nachrichtenaustausch zwischen Master- und Worker-Threads übersichtlicher zu gestalten wurden Wrapper-Funktionen, die den gesamten Kommunikationsprozess verwalten, entwickelt. Jede dieser Wrapper-Funktionen besitzt dabei einen Antagonisten. Hierbei gehören die Funktionen \texttt{scatterChunksToWorker} und \texttt{rxChunkFromMaster}, sowie \texttt{collectChunksFromWorkers} und \texttt{txChunksToMaster} untrennbar zusammen. Durch den Aufruf einer dieser Funktionen auf der Master- oder Worker-Seite wird ein Aufruf der Antagonisten für den fehlerfreien Ablauf der Simulation verpflichtend.
 
 \begin{figure}[H]
 	\centering
@@ -74,7 +75,7 @@ Um den Nachrichtenaustausch zwischen Master- und Worker-Threads übersichtlicher
 	\label{fig:ManagementMessages}
 \end{figure}
 
-Die Wrapperfunktionen verwenden hierbei bei der Ausführung die OpenMPI-Funktionen Send und Receive, welche im Kapitel 2.4 näher erläutert wurden. Exemplarisch wird der Nachrichtenaustausch am Beispiel der nachfolgenden Code-fragmente der Funktionen CollectChunkFromWorker und txChunkToMaster beleuchtet.
+Die Wrapper-Funktionen verwenden hierbei bei der Ausführung die OpenMPI-Funktionen Send und Receive, welche im Kapitel \ref{sec:open_mpi} näher erläutert wurden. Exemplarisch wird der Nachrichtenaustausch am Beispiel der nachfolgenden Code-fragmente der Funktionen \texttt{CollectChunkFromWorker} und \texttt{txChunkToMaster} beleuchtet.
 
 \begin{lstlisting}[language=C]
 void txChunksToMaster()
@@ -85,7 +86,7 @@ void txChunksToMaster()
 }
 \end{lstlisting}
 
-Die Funktion txChunksToMaster birgt die Sendefunktionen und wird ausschließlich von Worker-Threads aufgerufen. Das Sendeziel bildet hierbei der Master-Thread. Bei der Ausführung der Funktion wird zuerst das Worker-eigenen Offset des simulierten Wellenabschnittes übertragen. Danach werden zwei Arrays der Länge des eines Chunks übermittelt. Die übertragenen Arrays sind die alten und aktuellen Werte des zugeteilten Wellenabschnittes. Sinnvoll wird der Aufruf von txChunkToMaster erst nach der Ausführung eines Simulationsschrittes mit Hilfe der Funktion exeSimulationOnChunk.   
+Die Funktion \texttt{txChunksToMaster} birgt die Sendefunktionen und wird ausschließlich von Worker-Threads aufgerufen. Das Sendeziel bildet hierbei der Master-Thread. Bei der Ausführung der Funktion wird zuerst das Worker-eigenen Offset des simulierten Wellenabschnittes übertragen. Danach werden zwei Arrays der Länge des eines Chunks übermittelt. Die übertragenen Arrays sind die alten und aktuellen Werte des zugeteilten Wellenabschnittes. Sinnvoll wird der Aufruf von \texttt{txChunkToMaster} erst nach der Ausführung eines Simulationsschrittes mit Hilfe der Funktion \texttt{exeSimulationOnChunk}.   
 
 \begin{lstlisting}[language=C]
 void collectChunksFromWorkers(int numtasks)
@@ -99,7 +100,7 @@ void collectChunksFromWorkers(int numtasks)
 }
 \end{lstlisting}
 
-Der Antagonist zu txChunksToMaster stellt die Funktion collectChunksFromWorkers dar. Hierbei werden alle Chunks der Worker-Threads eingesammelt. Das Einsammeln wird mit der Funktion Receive realisiert. Zuerst wird das Offset des jeweilig sendenen Worker-threads empfangen. Dadurch kann für die nachfolgend empfangenen Arrays ein Update der richtigen Punkte des Master-thread eigenen Datenstrukturen erfolgen. Somit wird durch den Aufruf innerhalb einer Schleife ein aktuelles Bild der Welle auf dem Master-Thread gebildet. Dazu werden nacheinander alle Werte der Worker-Thread eingesammelt.
+Der Antagonist zu \texttt{txChunksToMaster} stellt die Funktion \texttt{collectChunksFromWorkers} dar. Hierbei werden alle Chunks der Worker-Threads eingesammelt. Das Einsammeln wird mit der Funktion Receive realisiert. Zuerst wird das Offset des jeweilig sendenen Worker-threads empfangen. Dadurch kann für die nachfolgend empfangenen Arrays ein Update der richtigen Punkte des Master-thread eigenen Datenstrukturen erfolgen. Somit wird durch den Aufruf innerhalb einer Schleife ein aktuelles Bild der Welle auf dem Master-Thread gebildet. Dazu werden nacheinander alle Werte der Worker-Thread eingesammelt.
 
 
 \subsection{Benutzeroberfläche}

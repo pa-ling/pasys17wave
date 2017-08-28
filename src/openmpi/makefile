@@ -68,7 +68,7 @@ endif
 
 # The first target (all) is always the default target
 .PHONY: all
-all: build test
+all: build test valgrind
 
 # Our build target depends on the real target
 .PHONY: build
@@ -89,7 +89,6 @@ $(TARGET): $(OBJS)
 test: $(TESTS)
 	$(foreach T,$(TESTS), ./$(T) &&) true
 
-LD_LIBRARY_PATH=/media/tristan/DATA/Study/computer_science/master/2.semester/Parallel_Systems/Uebung/structure/bug/DownloadedSoftware/gcc-build/x86_64-unknown-linux-gnu/libgomp/.libs/
 valgrind:
 	valgrind --tool=helgrind ./$(TARGET)
 

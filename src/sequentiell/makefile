@@ -18,7 +18,7 @@ TARGET=wave
 # Flags and stuff, change as required
 OPTIMIZE=-O3
 # Flags for all languages
-CPPFLAGS=-ggdb $(OPTIMIZE) -Wall -MMD -MP -fopenmp -std=c11 `pkg-config --cflags --libs gtk+-2.0 --libs gthread-2.0`
+CPPFLAGS=-ggdb $(OPTIMIZE) -Wall -MMD -MP -std=c11 `pkg-config --cflags --libs gtk+-2.0 --libs gthread-2.0`
 # Flags for C only
 CFLAGS=-Wmissing-prototypes
 # Flags for C++ only

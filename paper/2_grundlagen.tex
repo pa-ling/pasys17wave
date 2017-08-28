@@ -11,7 +11,7 @@ Die Basis der zu entwickelnden Programme bildet folgende Gleichung:
 Dabei ist $t$ der Zeitpunkt Schwingung, $i$ der Index der Welle und A(i,t) steht für die Amplitude zum Zeitpunkt t und am Punkt i.\\
 Klarer wird diese wenn man sich A(i, t+1), also das Ergebnis der Gleichung, als den zukünftigen Wert an der aktuellen Stelle (futureVal) vorstellt. Dann würde die Gleichung ungefähr so aussehen:
 \begin{quote}
-	$futureVal = 2 * presentVal - pastVal + c * (presentLeftNeighbourVal - 2 * presentVal + presentRightNeighbourVal)$
+	$futureVal = 2 \cdot presentVal - pastVal + c \cdot (presentLeftNeighbourVal - 2 \cdot presentVal + presentRightNeighbourVal)$
 \end{quote} 
 Die Variable C ist eine Konstante, welche der Schrittweite zwischen zwei benachbarten Zeitpunkten t entspricht. Damit kann die Geschwindigkeit der Wellenbewegung beeinflusst werden.
 
@@ -31,7 +31,7 @@ for (i = 0; i < arrayLength; i++)
 
 Dabei wird die Schleife auf alle verfügbaren Prozessoren in einem eigenen Thread aufgeteilt, sodass jeder Prozessor in etwa die gleiche Anzahl an Schleifendurchführungen berechnet. Dies ist offensichtlich nur möglich, wenn die Schleifendurchführungen unabhängig voneinander sind.
 
-\subsection{OpenMPI}
+\subsection{OpenMPI} \label{sec:open_mpi}
 Neben eng gekoppelten Speichersystemen, gibt es auch lose gekoppelte Speichersystem, d.h. es gibt keinen globalen Speicher, sondern jeder Prozessor hat nur seinen eigenen Speicher. Eine Kommunikation erfolgt hier über das Netzwerk. Solche Installationen findet man z.B. in Grids, wo mehrere Rechner wie ein Rechner agieren. Für solche Systeme wurde OpenMPI entwickelt, obwohl es auch auf eng gekoppelten Systemen läuft, indem es eine lose Gekoppeltes simuliert.\\
 Der Kern von OpenMPI ist das Austauschen von Informationen zwischen den Prozessoren über "Nachrichten". In der Regel wird die Anwendung von einem Master- oder Root-Prozess initialisert, welcher dann die Daten, die parallelisiert verarbeitet werden sollen an die zur Verfügung stehenden Worker-Prozesse verteilt und nach der Berechnung wieder erhält.\\
 %TODO sehr simples Beispiel einfügen?
@@ -53,7 +53,7 @@ Bei der Verwendung müssen die folgenden Parameter übergeben werden:
 \item Kommunikator
 \end{itemize}
 
-Die Funktion Receive hingegen bildet das Gegenstück zu Send, sie ermöglicht das Empfangen von  und Zuordnen von Daten zu einer Variable. Zu beachten ist, dass die Funktion Receive die Eigenschaft hat non-blocking zu sein. Deswegen wird auf eine Nachricht des korrespondierenden  Send solange gewartet bis diese eintrifft.
+Die Funktion Receive hingegen bildet das Gegenstück zu Send, sie ermöglicht das Empfangen von  und Zuordnen von Daten zu einer Variable. Zu beachten ist, dass die Funktion Receive die Eigenschaft hat non-blocking zu sein. Deswegen wird auf eine Nachricht des korrespondierenden  Send solange gewartet bis diese eintrifft. %blocking???
 
 \begin{lstlisting}[language=C]
 MPI_Recv(void* data, int count,MPI_Datatype datatype, int source, int tag, MPI_Comm communicator,MPI_Status* status)
@@ -71,7 +71,7 @@ Bei der Verwendung der Funktion müssen die folgenden Parameter übergeben werde
 \item Status
 \end{itemize}
 
-Für den fehlerfreien Gebrauch von Send und Receive müssen diese zwingend zusammen genutzt werden. Es darf demnach kein Send ohne korrespondierenden Receive existieren, das sonst ein eine interner Fehler von openMPI ausgelöst wird. Gleichfalls darf kein Receive ohne passendes Send vorkommen, andernfalls wird eine Deadlock hervorgerufen, der nicht zur laufzeit auf gelöst werden  kann.
+Für den fehlerfreien Gebrauch von Send und Receive müssen diese zwingend zusammen genutzt werden. Es darf demnach kein Send ohne korrespondierenden Receive existieren, das sonst ein eine interner Fehler von openMPI ausgelöst wird. Es darf ebenfalls kein Receive ohne passendes Send vorkommen, dies würde zu einem einem Deadlock.
 
 \subsection {False Sharing}
 Ein wichtiger Punkt bei der Entwicklung von parallelisiert Anwendungen ist das False-Sharing-Problem, welches dazu führen kann das eine parallelisierte Anwendung langsamer läuft als ihre entsprechende sequentielle Anwendung.\\

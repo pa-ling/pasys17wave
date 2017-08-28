@@ -246,6 +246,7 @@ int main(int argc, char *argv[])
     {
         int stepsToExecute = getSimulationSteps();
         calcWave_without_GUI(stepsToExecute, dataSize, taskid, numtasks);
+        output();
     }
     else
     {

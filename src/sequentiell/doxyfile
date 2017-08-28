@@ -1,5 +1,5 @@
 # Die Dokumentation befindet sich im Unterverzeichnis doc.
-OUTPUT_DIRECTORY= ../../doxygen/openmpi
+OUTPUT_DIRECTORY= ../../doxygen/sequentiell
 
 # Basis für die Dokumentation ist das aktuelle Verzeichnis.
 INPUT = .
