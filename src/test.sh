@@ -45,27 +45,30 @@ UsedLibrary="OpenMP"
 
 threads="1"
 echo "OMP_NUM_THREADS=1"
+breakLineToResultsFile $UsedLibrary $threads
 
 breakLineToResultsFile $UsedLibrary $threads
 
 calculateAverage $threads $configFile_OpenMP 0 $simulations $UsedLibrary $program_OpenMP
 calculateAverage $threads $configFile_OpenMP 500000 $simulations $UsedLibrary $program_OpenMP
-calculateAverage $threads $configFile 1000000 $simulations
-calculateAverage $threads $configFile 5000000 $simulations
-calculateAverage $threads $configFile 10000000 $simulations
-calculateAverage $threads $configFile 15000000 $simulations
-calculateAverage $threads $configFile 20000000 $simulations
+calculateAverage $threads $configFile_OpenMP 1000000 $simulations $UsedLibrary $program_OpenMP
+calculateAverage $threads $configFile_OpenMP 5000000 $simulations $UsedLibrary $program_OpenMP
+calculateAverage $threads $configFile_OpenMP 10000000 $simulations $UsedLibrary $program_OpenMP
+calculateAverage $threads $configFile_OpenMP 15000000 $simulations $UsedLibrary $program_OpenMP
+calculateAverage $threads $configFile_OpenMP 20000000 $simulations $UsedLibrary $program_OpenMP
+
 
 echo "OMP_NUM_THREADS=2"
 threads="2"
+breakLineToResultsFile $UsedLibrary $threads
 
-calculateAverage $threads $configFile 0 $simulations
-calculateAverage $threads $configFile 500000 $simulations
-calculateAverage $threads $configFile 1000000 $simulations
-calculateAverage $threads $configFile 5000000 $simulations
-calculateAverage $threads $configFile 10000000 $simulations
-calculateAverage $threads $configFile 15000000 $simulations
-calculateAverage $threads $configFile 20000000 $simulations
+calculateAverage $threads $configFile_OpenMP 0 $simulations $UsedLibrary $program_OpenMP
+calculateAverage $threads $configFile_OpenMP 500000 $simulations $UsedLibrary $program_OpenMP
+calculateAverage $threads $configFile_OpenMP 1000000 $simulations $UsedLibrary $program_OpenMP
+calculateAverage $threads $configFile_OpenMP 5000000 $simulations $UsedLibrary $program_OpenMP
+calculateAverage $threads $configFile_OpenMP 10000000 $simulations $UsedLibrary $program_OpenMP
+calculateAverage $threads $configFile_OpenMP 15000000 $simulations $UsedLibrary $program_OpenMP
+calculateAverage $threads $configFile_OpenMP 20000000 $simulations $UsedLibrary $program_OpenMP
 
 program_OpenMPI="./openmpi/wave"
 configFile_OpenMPI="./openmpi/wave.conf"
