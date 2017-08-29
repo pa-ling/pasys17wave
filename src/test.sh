@@ -9,13 +9,21 @@ function calculateAverage {
     sum=0
     for i in `seq 1 10`;
     do
+        if [ "$5" = "sequentiell" ]
+        then
+            timeOutput=$( { time -p $6 $2 $3 $4; } 2>&1 )
+        fi
+
         if [ "$5" = "OpenMP" ] 
         then
             timeOutput=$( { time -p OMP_NUM_THREADS=$1 $6 $2 $3 $4; } 2>&1 )
-        elif [ "$5" = "OpenMPI" ] 
+        fi
+
+        if [ "$5" = "OpenMPI" ] 
         then
             timeOutput=$( { time -p mpiexec -np $1 $6 $2 $3 $4; } 2>&1 )
         fi
+	
 
         result=$(echo "$timeOutput" | grep $grepValue)
         resultTime=${result:5:4}
@@ -37,7 +45,26 @@ function breakLineToResultsFile {
 #clean up 
 echo "Benchmark:"> $resultsFile
 
+#                       1               2               3           4           5           6
 #calculateAverage <THREAD_INVOLVED> <CONFIG_FILE> <ARRAY_SIZE> <STEP_SIZE> <LIBRARY> <PATH_TO_EXECUTABLE>
+
+##########################################################################################################
+program_seq="./sequentiell/wave"
+configFile_seq="./sequentiell/wave.conf"
+UsedLibrary="sequentiell"
+
+threads="1"
+breakLineToResultsFile $UsedLibrary $threads
+
+calculateAverage $threads $configFile_seq 0 $simulations $UsedLibrary $program_seq
+calculateAverage $threads $configFile_seq 500000 $simulations $UsedLibrary $program_seq
+calculateAverage $threads $configFile_seq 1000000 $simulations $UsedLibrary $program_seq
+calculateAverage $threads $configFile_seq 5000000 $simulations $UsedLibrary $program_seq
+calculateAverage $threads $configFile_seq 10000000 $simulations $UsedLibrary $program_seq
+calculateAverage $threads $configFile_seq 15000000 $simulations $UsedLibrary $program_seq
+calculateAverage $threads $configFile_seq 20000000 $simulations $UsedLibrary $program_seq
+
+##########################################################################################################
 
 program_OpenMP="./openmp/wave"
 configFile_OpenMP="./openmp/wave.conf"
@@ -47,8 +74,6 @@ threads="1"
 echo "OMP_NUM_THREADS=1"
 breakLineToResultsFile $UsedLibrary $threads
 
-breakLineToResultsFile $UsedLibrary $threads
-
 calculateAverage $threads $configFile_OpenMP 0 $simulations $UsedLibrary $program_OpenMP
 calculateAverage $threads $configFile_OpenMP 500000 $simulations $UsedLibrary $program_OpenMP
 calculateAverage $threads $configFile_OpenMP 1000000 $simulations $UsedLibrary $program_OpenMP
@@ -56,7 +81,6 @@ calculateAverage $threads $configFile_OpenMP 5000000 $simulations $UsedLibrary $
 calculateAverage $threads $configFile_OpenMP 10000000 $simulations $UsedLibrary $program_OpenMP
 calculateAverage $threads $configFile_OpenMP 15000000 $simulations $UsedLibrary $program_OpenMP
 calculateAverage $threads $configFile_OpenMP 20000000 $simulations $UsedLibrary $program_OpenMP
-
 
 echo "OMP_NUM_THREADS=2"
 threads="2"
@@ -69,6 +93,8 @@ calculateAverage $threads $configFile_OpenMP 5000000 $simulations $UsedLibrary $
 calculateAverage $threads $configFile_OpenMP 10000000 $simulations $UsedLibrary $program_OpenMP
 calculateAverage $threads $configFile_OpenMP 15000000 $simulations $UsedLibrary $program_OpenMP
 calculateAverage $threads $configFile_OpenMP 20000000 $simulations $UsedLibrary $program_OpenMP
+
+##########################################################################################################
 
 program_OpenMPI="./openmpi/wave"
 configFile_OpenMPI="./openmpi/wave.conf"
@@ -95,5 +121,7 @@ calculateAverage $threads $configFile_OpenMPI 5000000 $simulations $UsedLibrary 
 calculateAverage $threads $configFile_OpenMPI 10000000 $simulations $UsedLibrary $program_OpenMPI
 calculateAverage $threads $configFile_OpenMPI 15000000 $simulations $UsedLibrary $program_OpenMPI
 calculateAverage $threads $configFile_OpenMPI 20000000 $simulations $UsedLibrary $program_OpenMPI
+
+##########################################################################################################
 
 
