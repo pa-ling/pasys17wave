@@ -1,5 +1,10 @@
 % !TEX root = main.tex
 
 \section{Fazit}
-Sowohl OpenMP als auch OpenMPI brachten eine Performanceverbesserung, die weit unter dem Erwartungswert liegt. Die Gründe dafür sind nicht ganz geklärt. Am ehesten liegt es aber eine der geringen Rechenlast der verwendeten Gleichung. Versuche mit unnötigen Berechnungen die Rechenlast zu erhöhen schienen das Performance zu verbessern. Jedoch half das dem eigentlich Projektziel nicht weiter.
+Zusammenfassend kann gesagt werden, dass die Parallelisierung der Wellensimulation das Potenzial zur Zeiteinsparung hat. Bei der Verwendung der zwei Softwarebibliotheken OpenMP und OpenMPI konnten positive als auch negative Verbesserungen beobachtet werden.
+Der Einsatz von OpenMP brachte hierbei eine Performanceverbesserung. Diese offenbart sich mit einem Speedup von 1,08 zur Ausgangslösung. Die Verbesserung liegt jedoch niedriger als erwartet. Ein Grund dafür besteht in der geringen Rechenlast der Simulationsberechnung. Durchgeführte Versuche mit unnötigen Berechnungen die Rechenlast zu erhöhen haben bei der Problemsuche die Laufzeit-Performance verbessern können.
+ 
+Die Umsetzung der Parallelisierung gestaltete sich außerdem mit OpenMP wesentlich einfacher als mit OpenMPI. Die Umsetzung mit OpenMPI hat, im Bezug dessen, ein Konzept zur Verteilung der Arbeitlast von Nöten gemacht. Dafür musste das passgenaue Senden und Empfangen von Nachrichten zwischen Threads implementiert werden. Dies erhöht die Komplexität des Code und trägt nicht zur Übersichtlichkeit bei. 
+
+Ein weiterer Nachteil der umgesetzte Variante ist die Vergrößerung der Laufzeit der Simulation im Vergleich zur sequentiellen Variante. Der ermittelte Speedup von maximal 0,33 zeigt die Verschlechterung der Laufzeit auf. Diese Entwicklung widerspricht den Projektziel. Ein Grund für die zeitliche Verschlechterung liegt im Verteilungsaufwands des umgesetzten Master-Worker Konzepts. Dieser spielt hier als zeitlicher Kostenfaktor eine große Rolle und führt zu dem vorliegenden Ergebnis.
 %Mehr eingehen auf Testwerte
