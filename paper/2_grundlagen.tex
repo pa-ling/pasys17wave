@@ -36,7 +36,7 @@ Neben eng gekoppelten Speichersystemen, gibt es auch lose gekoppelte Speichersys
 Der Kern von OpenMPI ist das Austauschen von Informationen zwischen den Prozessoren über "Nachrichten". In der Regel wird die Anwendung von einem Master- oder Root-Prozess initialisert, welcher dann die Daten, die parallelisiert verarbeitet werden sollen an die zur Verfügung stehenden Worker-Prozesse verteilt und nach der Berechnung wieder erhält.\\
 %TODO sehr simples Beispiel einfügen?
 Um den Nachrichtenaustausch zwischen Prozessen zu in OpenMPI zu realisieren werden die beiden Funktionen Send und Receive benötigt.   
-Die Funktion Send ist in der Lage Daten in Form von Variablen von einem Thread zum anderen zu übermitteln.
+Die Funktion Send ist in der Lage Daten in Form von Variablen von einem Thread zum anderen zu übermitteln.\cite{MPI_Send}
  
 \begin{lstlisting}[language=C]
 MPI_Send(void* data,int count,MPI_Datatype datatype,int destination, int tag, MPI_Comm communicator)
@@ -53,7 +53,7 @@ Bei der Verwendung müssen die folgenden Parameter übergeben werden:
 \item Kommunikator
 \end{itemize}
 
-Die Funktion Receive hingegen bildet das Gegenstück zu Send, sie ermöglicht das Empfangen von  und Zuordnen von Daten zu einer Variable. Zu beachten ist, dass die Funktion Receive die Eigenschaft hat non-blocking zu sein. Deswegen wird auf eine Nachricht des korrespondierenden  Send solange gewartet bis diese eintrifft. %blocking???
+Die Funktion Receive hingegen bildet das Gegenstück zu Send, sie ermöglicht das Empfangen von  und Zuordnen von Daten zu einer Variable. Zu beachten ist, dass die Funktion Receive die Eigenschaft hat non-blocking zu sein \cite{MPI_Recv}. Deswegen wird auf eine Nachricht des korrespondierenden Send solange gewartet bis diese eintrifft. %blocking???
 
 \begin{lstlisting}[language=C]
 MPI_Recv(void* data, int count,MPI_Datatype datatype, int source, int tag, MPI_Comm communicator,MPI_Status* status)
