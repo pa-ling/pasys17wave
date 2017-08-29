@@ -44,12 +44,12 @@ Jede Konfiguration wird dabei zehn mal ausgeführt. Dabei wird die Zeit gemessen
 		
 		\addplot[color=blue,mark=square*]
 		coordinates {
-			(0,0)(1000000,10)(5000000,24)(10000000,49)(20000000,85)
+			(0,0)(1000000,2)(5000000,13)(10000000,25)(20000000,53)
 		};
 		
 		\addplot[color=red,mark=square*]
 		coordinates {
-			(0,0)(1000000,10)(5000000,23)(10000000,48)(20000000,80)
+			(0,0)(1000000,3)(5000000,15)(10000000,36)(20000000,49)
 		};
 	
 		\addplot[color=darkgreen,mark=square*]
@@ -71,9 +71,9 @@ Jede Konfiguration wird dabei zehn mal ausgeführt. Dabei wird die Zeit gemessen
 		xlabel = {Punktmenge},
 		ylabel = {SpeedUp},
 		xmin = 0, xmax = 20000000,
-		ymin = 0, ymax = 100,
+		ymin = 0, ymax = 1.5,
 		xtick = {0, 5000000, 10000000, 15000000, 20000000},
-		ytick = {0, 25, 50, 75, 100},
+		ytick = {0, 0.25, 0.50, 0.75, 1, 1.25},
 		%appearance
 		legend pos = north west, %alternatives: e.g. (outer) north east
 		legend cell align = left,
@@ -90,12 +90,12 @@ Jede Konfiguration wird dabei zehn mal ausgeführt. Dabei wird die Zeit gemessen
 		
 		\addplot[color=red,mark=square*]
 		coordinates {
-			(0,0)(1000000,10)(5000000,23)(10000000,48)(20000000,80)
+			(0,0)(1000000,0.66)(5000000,0.86)(10000000,0.69)(20000000, 1.08)
 		};
 		
 		\addplot[color=darkgreen,mark=square*]
 		coordinates {
-			(0,0)(1000000,8)(5000000,41)(10000000,81)(20000000,158)
+			(0,0)(1000000,0.25)(5000000,0.31)(10000000,0.30)(20000000,0.33)
 		};
 		
 		\end{axis}
