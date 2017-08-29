@@ -17,6 +17,14 @@ Jede Konfiguration wird dabei zehn mal ausgeführt. Dabei wird die Zeit gemessen
 
 \subsection{Auswertung der Tests} %Alle Koordinatenpaare in diesem Abschnitt sollten überprüft/angepasst werden
 
+Die beiden folgenden Diagramme stellen die Testergebnisse der Paralellisierung dar. Das erste Diagramm zeigt hierbei das Verhältnis zwischen der Ausführungszeit in Sekunden und der jeweiligen Punktmengen, welche bei der Simulation der Wellengleichung jeweils berechnet wurden.
+Das zweite Diagramm legt den Speedup der beiden Parallelisierungslösungen zur sequentiell Lösung im Bezug auf die Ausführungszeit dar.
+Zur leichteren Unterscheidung wurden die verschiedenen Lösungsansätze farblich hervorgehoben.
+  
+Bei der Analyse der drei Kurven in der Abbildung \ref{fig:diagramZeit} kann festgestellt werden, dass der Lösungsansatz mit OpenMPI die längste Ausführungszeit verursachte. Die dabei verursachte Ausführungszeit übersteigt den in blau dargestellten sequentiellen Lösungsansatz erheblich. Als Konsequenz daraus ist abzuleiten, dass diese Parallelisierungslösung nicht das angestrebte Projektziel erreicht hat. Ein Grund für die schlechten Performance der openMPI-Lösung stellt der hoher Verwaltungsaufwand dar, welche bei der Verteilung der Chunks vom Master an die Worker notwendig wird. Potenziell kann es außerdem zu Wartezeiten zwischen den Workern kommen, falls die Abarbeitung eines Worker bereits abgeschlossen ist und dieser bis zur erneuten Verteilung der Chunks auf den Master warten muss.
+
+Der Lösungansatz unter Verwendung von OpenMP konnte im Vergleich zur OpenMPI-Lösung eine bessere Ausführungszeit erzielen. Im Vergleich mit der sequentiellen Lösung konnte dieser jedoch nicht den gewünschten Geschwindigkeitsvorteil bringen. Die Geschwindigkeit nährt sich im überwiegenden Teile der Testkurven der sequentiellen Lösung an. Jedoch kann bei hinreichend großen Punktmengen ein Geschwindigkeitsvorteil erzeugt werden. Diese ist im letzen Abschnitt der Kurve zu sehen.
+
 \begin{figure}[H]
 	\centering
 	\begin{tikzpicture}
@@ -60,8 +68,11 @@ Jede Konfiguration wird dabei zehn mal ausgeführt. Dabei wird die Zeit gemessen
 		\end{axis}
 	\end{tikzpicture}
 	\caption{Zeit-Vergleich der Varianten für bestimmte Punktmengen}
-	\label{fig:diagram1}
+	\label{fig:diagramZeit}
 \end{figure}
+
+In Abbildung \ref{fig:diagramSpeedUp} ist der Speedup von OpenMP und OpenMPI dargestellt. Die grüne Kurve zeigt hier bei die OpenMPI-Lösung. Der Speedup erreicht hier unabhängig von der zu simulierenden Punktmenge nicht mehr als 0,33 der sequentiellen Lösung. Somit ist keiner zeitliche Verbesserung festzustellen. Im Gegenteil, die sequentielle Ausgangslösung wäre im direkten Vergleich somit zu wählen.
+Im Bezug auf die OpenMP-Lösung ist anhand des Kurvenverlaufs des Speedups ein Trend zur leichten Verbesserung der Ausführungszeit zu beobachten. Die Vermutung, dass die zu simulierende Punktmenge somit einen großen Einfluss auf die Ausführungszeit hat, wird damit bestätigt. Der maximale Speedup der OpenMP-Lösung betätigt mit Test 1,08. Die Parallelisierung hat deshalb im Zusammenhang einer hinreichend großen Punktmenge einen Geschwindigkeitsvorteil erzielt.
 
 \begin{figure}[H]
 	\centering
@@ -101,5 +112,5 @@ Jede Konfiguration wird dabei zehn mal ausgeführt. Dabei wird die Zeit gemessen
 		\end{axis}
 	\end{tikzpicture}
 	\caption{SpeedUp-Vergleich von OpenMP und OpenMPI}
-	\label{fig:diagram1}
+	\label{fig:diagramSpeedUp}
 \end{figure}
